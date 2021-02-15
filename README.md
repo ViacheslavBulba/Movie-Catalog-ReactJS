@@ -28,7 +28,7 @@ https://babeljs.io/setup#installation
 
 `npm install lodash`
 
-`npm install --save-dev babel-loader @babel/core`
+`npm install --save-dev babel-loader @babel/core @babel/preset-env`
 
 `npm install --save-dev webpack-merge`
 
@@ -42,12 +42,12 @@ https://babeljs.io/setup#installation
 
 ## Results
 
-`npm start`
-
-`npm run start-prod`
-
 `npm run build`
 
+`npm start`
+
 `npm run build-prod`
+
+`npm run start-prod`
 
 `npm test`
