@@ -1,5 +1,3 @@
-import { join } from 'lodash';
-
 if (process.env.NODE_ENV !== 'production') {
     console.log('Looks like we are in DEV mode!');
 } else {
@@ -9,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 function component() {
     const element = document.createElement('div');
 
-    element.innerHTML = join(['Hello', 'webpack'], ' ');
+    element.innerHTML = "Hello webpack";
 
     return element;
 }
