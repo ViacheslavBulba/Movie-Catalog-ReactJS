@@ -25,7 +25,14 @@ module.exports = merge(common, {
             new CssMinimizerPlugin(),
         ],
         splitChunks: {
-            chunks: 'all',
+            cacheGroups: {
+                commons: {
+                    name: "commons",
+                    chunks: "all",
+                    minSize: 0,
+                    minChunks: 2
+                }
+            }
         },
     },
 });
