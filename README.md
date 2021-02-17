@@ -22,8 +22,6 @@ https://babeljs.io/setup#installation
 
 `npm install react react-dom @reduxjs/toolkit react-redux react-router`
 
-`npm install --save-dev jest`
-
 `npm install --save-dev webpack webpack-cli webpack-dev-server`
 
 `npm install lodash`
@@ -39,6 +37,12 @@ https://babeljs.io/setup#installation
 `npm install --save-dev clean-webpack-plugin`
 
 `npm install --save-dev html-webpack-plugin`
+
+## Jest setup
+
+`npm install --save-dev jest`
+
+run `./node_modules/.bin/jest --init` to create config
 
 ## Results
 
