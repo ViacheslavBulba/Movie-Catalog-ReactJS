@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ViacheslavBulba/react-mentoring-program#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@reduxjs/toolkit": "^1.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -29,6 +30,7 @@
     "react-router": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.16",
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
     "babel-loader": "^8.2.2",

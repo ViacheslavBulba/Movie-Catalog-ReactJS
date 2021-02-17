@@ -24,10 +24,6 @@ https://babeljs.io/setup#installation
 
 `npm install --save-dev webpack webpack-cli webpack-dev-server`
 
-`npm install lodash`
-
-`npm install --save-dev babel-loader @babel/core @babel/preset-env`
-
 `npm install --save-dev webpack-merge`
 
 `npm install --save-dev mini-css-extract-plugin css-minimizer-webpack-plugin`
@@ -43,6 +39,16 @@ https://babeljs.io/setup#installation
 `npm install --save-dev jest`
 
 run `./node_modules/.bin/jest --init` to create config
+
+## Babel setup
+
+https://babeljs.io/docs/en/usage/
+
+`npm install --save-dev babel-loader @babel/core @babel/preset-env`
+
+`npm install --save-dev @babel/cli`
+
+`npm install --save @babel/polyfill`
 
 ## Results
 
