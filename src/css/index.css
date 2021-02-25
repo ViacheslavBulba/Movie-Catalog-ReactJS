@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Sans Pro';
+}
+
+button {
+    border: none;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #c0c3ce !important;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #c0c3ce !important;
+    opacity: 1;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #c0c3ce !important;
+    opacity: 1;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
