@@ -212,14 +212,14 @@ export default function App() {
         <>
             <ErrorBoundary>
                 <Header />
-                <div className="main-container">
+                <main className="main-container">
                     <div className="filtering-and-sorting-container">
                         <Filtering />
                         <Sorting />
                     </div>
                     <ResultsCount />
-                    <MovieList listInput={movieList} />
-                </div>
+                    <MovieList movies={movieList} />
+                </main>
                 <Footer />
             </ErrorBoundary>
         </>

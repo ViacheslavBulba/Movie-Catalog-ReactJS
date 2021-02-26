@@ -34,6 +34,12 @@
 
 `npm install --save prop-types`
 
+## Some useful Links
+
+https://reactjs.org/docs/typechecking-with-proptypes.html
+
+https://reactjs.org/docs/error-boundaries.html
+
 # Webpack home task
 
 ## Task
