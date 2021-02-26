@@ -217,7 +217,7 @@ export default function App() {
                         <Filtering />
                         <Sorting />
                     </div>
-                    <ResultsCount />
+                    <ResultsCount count={30} />
                     <MovieList movies={movieList} />
                 </main>
                 <Footer />

@@ -2,11 +2,11 @@
 import React from 'react';
 import '../css/ResultsCount.css';
 
-export default function ResultsCount() {
+export default function ResultsCount(props) {
 
     return (
         <div className="result-count-container">
-            <b>39</b> movies found
+            <b>{props.count}</b> movies found
         </div>
     );
 }
