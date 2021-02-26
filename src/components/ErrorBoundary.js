@@ -10,7 +10,7 @@ export default class ErrorBoundary extends React.Component {
         this.setState({
             error: error,
             errorInfo: errorInfo
-        })
+        });
         // You can also log error messages to an error reporting service here
     }
 

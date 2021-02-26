@@ -34,6 +34,10 @@
 
 `npm install --save prop-types`
 
+`npm install eslint --save-dev`
+
+`npx eslint --init`
+
 ## Some useful Links
 
 https://reactjs.org/docs/typechecking-with-proptypes.html
@@ -94,7 +98,7 @@ https://babeljs.io/docs/en/usage/
 
 `npm install --save-dev @babel/preset-react`
 
-## Results
+## Commands
 
 `npm run build`
 
@@ -105,3 +109,5 @@ https://babeljs.io/docs/en/usage/
 `npm run start-prod`
 
 `npm test`
+
+`npx eslint src`

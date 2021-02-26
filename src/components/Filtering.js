@@ -11,5 +11,5 @@ export default function Filtering() {
             <button className="filter-option">HORROR</button>
             <button className="filter-option">CRIME</button>
         </div>
-    )
+    );
 }

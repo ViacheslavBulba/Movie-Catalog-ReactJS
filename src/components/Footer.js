@@ -12,5 +12,5 @@ export default function Footer() {
                 className="footer-logo"
             />
         </footer>
-    )
+    );
 }

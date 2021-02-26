@@ -24,5 +24,5 @@ export default function Header() {
                 <button className="search-button">SEARCH</button>
             </div>
         </header>
-    )
+    );
 }

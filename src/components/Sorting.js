@@ -5,5 +5,5 @@ export default function Sorting() {
 
     return (
         <span className="dropdown-label">SORT BY: RELEASE DATE</span>
-    )
+    );
 }

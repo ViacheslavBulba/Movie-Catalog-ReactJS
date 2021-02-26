@@ -11,5 +11,5 @@ export default function MovieList(props) {
                 <MovieCard movie={item} key={item.id} />
             ))}
         </div>
-    )
+    );
 }

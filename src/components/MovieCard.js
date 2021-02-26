@@ -18,10 +18,10 @@ export default function MovieCard(props) {
                         className="year"
                     />
                 </div>
-                <div className="genres">{props.movie.genres.join(", ")}</div>
+                <div className="genres">{props.movie.genres.join(', ')}</div>
             </div>
         </>
-    )
+    );
 }
 
 MovieCard.propTypes = {
@@ -31,4 +31,4 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired)
     }).isRequired,
-}
+};

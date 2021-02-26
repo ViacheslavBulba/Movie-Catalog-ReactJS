@@ -8,5 +8,5 @@ export default function ResultsCount() {
         <div className="result-count-container">
             <b>39</b> movies found
         </div>
-    )
+    );
 }
