@@ -1,4 +1,32 @@
+@import 'primereact/resources/themes/saga-blue/theme.css';
+@import 'primereact/resources/primereact.min.css';
+@import 'primeicons/primeicons.css';
+
 .dropdown-label {
     margin-right: 20px;
     color: #555555;
+}
+
+.p-dropdown {
+    width: 145px;
+}
+
+.p-dropdown-trigger {
+    width: auto !important;
+}
+
+.p-dropdown-label,
+.p-dropdown-item,
+.p-component {
+    color: #ffffff !important;
+    background-color: #232323 !important;
+    border: none !important;
+}
+
+.p-highlight {
+    background-color: #000000 !important;
+}
+
+.p-dropdown-item:hover {
+    background-color: #555555 !important;
 }
