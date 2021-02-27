@@ -2,8 +2,6 @@ import React from 'react';
 import '../css/Filtering.css';
 
 export default function Filtering() {
-    throw new Error('I crashed!');
-
     return (
         <div className="filter-container">
             <button className="filter-option">ALL</button>
