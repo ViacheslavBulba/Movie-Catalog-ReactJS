@@ -1,0 +1,92 @@
+.header-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    display: block;
+    background-image: url('../../public/netflix-background.jpg');
+    background-size: cover;
+    width: 100vw;
+    height: 100%;
+
+    -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
+.logo-and-add-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+.add-button {
+    padding: 0;
+    width: 170px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    color: #f65261;
+    background-color: #555555;
+}
+
+.header-text {
+    font-family: 'Source Sans Pro';
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 150px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.search-input {
+    width: 70%;
+    min-width: 250px;
+    height: 50px;
+    border-radius: 3px;
+    border: solid 1px #d9dbe3;
+    background-color: #ffffff;
+    padding-left: 10px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+}
+
+.search-button {
+    width: 30%;
+    margin-left: 10px;
+    height: 50px;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #f65261;
+}

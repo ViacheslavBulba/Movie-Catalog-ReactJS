@@ -1,3 +1,37 @@
+# Components home task part 1 (functional components)
+
+## Some command used for this task
+
+`npm i svg-url-loader --save-dev`
+
+`npm install --save moment react-moment`
+
+`npm install bootstrap`
+
+`npm install url-loader --save-dev`
+
+`npm install --save prop-types`
+
+`npm install eslint --save-dev`
+
+`npx eslint --init`
+
+## Some useful Links
+
+https://reactjs.org/docs/typechecking-with-proptypes.html
+
+https://reactjs.org/docs/error-boundaries.html
+
+## Adding dropdown component
+
+`npm install primereact --save`
+
+`npm i react-transition-group --save`
+
+`npm i primeicons --save`
+
+`npm install --save-dev style-loader`
+
 # Webpack home task
 
 ## Task
@@ -50,7 +84,9 @@ https://babeljs.io/docs/en/usage/
 
 `npm install --save @babel/polyfill`
 
-## Results
+`npm install --save-dev @babel/preset-react`
+
+## Commands
 
 `npm run build`
 
@@ -61,3 +97,5 @@ https://babeljs.io/docs/en/usage/
 `npm run start-prod`
 
 `npm test`
+
+`npx eslint src`

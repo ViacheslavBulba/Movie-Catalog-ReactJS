@@ -1,0 +1,17 @@
+.main-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #232323;
+    color: #ffffff;
+}
+
+.filtering-and-sorting-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
