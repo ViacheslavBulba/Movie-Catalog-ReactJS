@@ -12,7 +12,7 @@
     z-index: -1;
 
     display: block;
-    background-image: url('../../public/netflix-background.jpg');
+    background-image: url('../../../public/netflix-background.jpg');
     background-size: cover;
     width: 100vw;
     height: 100%;

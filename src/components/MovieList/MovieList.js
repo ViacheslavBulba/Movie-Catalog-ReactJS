@@ -1,7 +1,7 @@
 
 import React from 'react';
-import '../css/MovieList.css';
-import MovieCard from './MovieCard';
+import './MovieList.css';
+import MovieCard from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 
 export default function MovieList(props) {

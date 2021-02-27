@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import '../css/App.css';
-import Header from './Header';
-import Footer from './Footer';
-import Filtering from './Filtering';
-import Sorting from './Sorting';
-import ResultsCount from './ResultsCount';
-import MovieList from './MovieList';
-import ErrorBoundary from './ErrorBoundary';
+import './App.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Filtering from '../Filtering/Filtering';
+import Sorting from '../Sorting/Sorting';
+import ResultsCount from '../ResultsCount/ResultsCount';
+import MovieList from '../MovieList/MovieList';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 export default function App() {
 

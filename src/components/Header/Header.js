@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/Header.css';
-import logo from '../../public/netflix-logo.svg';
+import './Header.css';
+import logo from '../../../public/netflix-logo.svg';
 
 export default function Header() {
 

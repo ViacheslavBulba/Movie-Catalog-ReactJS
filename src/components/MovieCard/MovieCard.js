@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/MovieCard.css';
+import './MovieCard.css';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 

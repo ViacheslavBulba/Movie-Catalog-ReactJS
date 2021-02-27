@@ -1,6 +1,6 @@
 import React from 'react';
-import '../css/Footer.css';
-import logo from '../../public/netflix-logo.svg';
+import './Footer.css';
+import logo from '../../../public/netflix-logo.svg';
 
 export default function Footer() {
 
