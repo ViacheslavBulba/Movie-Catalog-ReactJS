@@ -1,6 +1,7 @@
 
 import React from 'react';
 import '../css/ResultsCount.css';
+import PropTypes from 'prop-types';
 
 export default function ResultsCount(props) {
 
@@ -10,3 +11,7 @@ export default function ResultsCount(props) {
         </div>
     );
 }
+
+ResultsCount.propTypes = {
+    count: PropTypes.number.isRequired,
+};
