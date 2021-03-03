@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import '../css/Sorting.css';
+import './Sorting.css';
 
 export default function Sorting() {
 

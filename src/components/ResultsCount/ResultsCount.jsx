@@ -1,6 +1,6 @@
 
 import React from 'react';
-import '../css/ResultsCount.css';
+import './ResultsCount.css';
 import PropTypes from 'prop-types';
 
 export default function ResultsCount(props) {
