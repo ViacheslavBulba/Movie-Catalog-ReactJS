@@ -4,12 +4,9 @@ import './Sorting.css';
 import PropTypes from 'prop-types';
 
 export default function Sorting(props) {
-    const [selectedOption, setSelectedOption] = useState(props.orderBy);
-
     const sortByOptions = ['RELEASE DATE', 'NAME (A-Z)'];
 
     const onSelectionChange = (e) => {
-        setSelectedOption(e.value);
         props.changeOrder(e.value);
     };
 
@@ -17,7 +14,7 @@ export default function Sorting(props) {
         <div>
             <span className='dropdown-label'>SORT BY:</span>
             <Dropdown
-                value={selectedOption}
+                value={props.orderBy}
                 options={sortByOptions}
                 onChange={onSelectionChange}
             />

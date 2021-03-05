@@ -10,6 +10,5 @@
 }
 
 .filter-active {
-    border-color: #ffffff;
-    border-style: none none solid none;
+    border-bottom: 3px solid #fff;
 }

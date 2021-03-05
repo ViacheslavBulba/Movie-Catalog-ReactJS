@@ -3,20 +3,17 @@ import './Filtering.css';
 import PropTypes from 'prop-types';
 
 export default function Filtering(props) {
-    const [activeFilters, setActiveFilters] = useState(props.genresFilter);
-
-    const onFilterChange = (e) => {
-        let filters = activeFilters;
-        if (e.target.innerHTML === 'All') {
+    const onFilterChange = (value) => {
+        let filters = props.genresFilter;
+        if (value === 'All') {
             filters = [];
         } else {
-            if (filters.includes(e.target.innerHTML)) {
-                filters = filters.filter((k) => k != e.target.innerHTML);
+            if (filters.includes(value)) {
+                filters = filters.filter((k) => k != value);
             } else {
-                filters = [...filters, e.target.innerHTML];
+                filters = [...filters, value];
             }
         }
-        setActiveFilters(filters);
         props.onFilterChange(filters);
     };
 
@@ -25,45 +22,53 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (activeFilters.length === 0 ? 'filter-active' : '')
+                    (props.genresFilter.length === 0 ? 'filter-active' : '')
                 }
-                onClick={onFilterChange}
+                onClick={() => onFilterChange('All')}
             >
                 All
             </button>
             <button
                 className={
                     'filter-option ' +
-                    (activeFilters.includes('Drama') ? 'filter-active' : '')
+                    (props.genresFilter.includes('Drama')
+                        ? 'filter-active'
+                        : '')
                 }
-                onClick={onFilterChange}
+                onClick={() => onFilterChange('Drama')}
             >
                 Drama
             </button>
             <button
                 className={
                     'filter-option ' +
-                    (activeFilters.includes('Fantasy') ? 'filter-active' : '')
+                    (props.genresFilter.includes('Fantasy')
+                        ? 'filter-active'
+                        : '')
                 }
-                onClick={onFilterChange}
+                onClick={() => onFilterChange('Fantasy')}
             >
                 Fantasy
             </button>
             <button
                 className={
                     'filter-option ' +
-                    (activeFilters.includes('Comedy') ? 'filter-active' : '')
+                    (props.genresFilter.includes('Comedy')
+                        ? 'filter-active'
+                        : '')
                 }
-                onClick={onFilterChange}
+                onClick={() => onFilterChange('Comedy')}
             >
                 Comedy
             </button>
             <button
                 className={
                     'filter-option ' +
-                    (activeFilters.includes('Action') ? 'filter-active' : '')
+                    (props.genresFilter.includes('Action')
+                        ? 'filter-active'
+                        : '')
                 }
-                onClick={onFilterChange}
+                onClick={() => onFilterChange('Action')}
             >
                 Action
             </button>
