@@ -6,4 +6,9 @@
     font-size: 18px;
     color: #ffffff;
     background-color: #232323;
+    text-transform: uppercase;
+}
+
+.filter-active {
+    border-bottom: 3px solid #fff;
 }

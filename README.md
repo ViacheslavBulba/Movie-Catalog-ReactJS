@@ -98,4 +98,4 @@ https://babeljs.io/docs/en/usage/
 
 `npm test`
 
-`npx eslint src`
+`npx eslint src --ext .jsx`
