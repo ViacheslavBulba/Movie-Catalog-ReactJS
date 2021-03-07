@@ -10,6 +10,7 @@ body {
 
 button {
     border: none;
+    text-transform: uppercase;
 }
 
 ::placeholder {
