@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import './MovieCard.css';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
+import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function MovieCard(props) {
     const [isHovering, setIsHovering] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    const showEditMovieModal = () => setShowModal(true);
 
     return (
         <>
@@ -16,6 +25,10 @@ export default function MovieCard(props) {
             >
                 {isHovering && (
                     <div className='edit-delete-icons-container'>
+                        <i
+                            className='fa fa-edit'
+                            onClick={showEditMovieModal}
+                        />
                         <i
                             className='fa fa-trash'
                             onClick={() => props.deleteMovie(props.movie.id)}
@@ -37,6 +50,12 @@ export default function MovieCard(props) {
                 </div>
                 <div className='genres'>{props.movie.genres.join(', ')}</div>
             </div>
+            <MovieDetailsModal
+                show={showModal}
+                handleCloseModal={handleCloseModal}
+                movie={props.movie}
+                updateMovie={props.updateMovie}
+            />
         </>
     );
 }
@@ -50,4 +69,5 @@ MovieCard.propTypes = {
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
     deleteMovie: PropTypes.func.isRequired,
+    updateMovie: PropTypes.func,
 };

@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function Header(props) {
-    const [show, setShow] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleCloseModal = () => {
-        setShow(false);
+        setShowModal(false);
     };
 
-    const showAddMovieModal = () => setShow(true);
+    const showAddMovieModal = () => setShowModal(true);
 
     return (
         <header className='header-container'>
@@ -21,7 +21,7 @@ export default function Header(props) {
                     ADD MOVIE
                 </button>
                 <MovieDetailsModal
-                    show={show}
+                    show={showModal}
                     handleCloseModal={handleCloseModal}
                     addMovie={props.addMovie}
                 />

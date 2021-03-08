@@ -20,6 +20,7 @@ export default class App extends React.Component {
         this.onFilterChange = this.onFilterChange.bind(this);
         this.addMovie = this.addMovie.bind(this);
         this.deleteMovie = this.deleteMovie.bind(this);
+        this.updateMovie = this.updateMovie.bind(this);
     }
 
     changeOrder(order) {
@@ -45,6 +46,15 @@ export default class App extends React.Component {
         movies = movies.filter((movie) => {
             return movie.id != id;
         });
+        this.setState({
+            movieList: movies,
+        });
+    }
+
+    updateMovie(movie) {
+        let movies = this.state.movieList;
+        let movieIndex = movies.findIndex((x) => x.id == movie.id);
+        movies[movieIndex] = movie;
         this.setState({
             movieList: movies,
         });
@@ -258,6 +268,7 @@ export default class App extends React.Component {
                         <MovieList
                             movies={movies}
                             deleteMovie={this.deleteMovie}
+                            updateMovie={this.updateMovie}
                         />
                     </main>
                     <Footer />
