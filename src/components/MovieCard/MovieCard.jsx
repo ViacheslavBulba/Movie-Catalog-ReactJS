@@ -69,5 +69,5 @@ MovieCard.propTypes = {
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
     deleteMovie: PropTypes.func.isRequired,
-    updateMovie: PropTypes.func,
+    updateMovie: PropTypes.func.isRequired,
 };

@@ -42,18 +42,14 @@ export default class App extends React.Component {
     }
 
     deleteMovie(id) {
-        let movies = this.state.movieList;
-        movies = movies.filter((movie) => {
-            return movie.id != id;
-        });
         this.setState({
-            movieList: movies,
+            movieList: this.state.movieList.filter((movie) => movie.id !== id),
         });
     }
 
     updateMovie(movie) {
         let movies = this.state.movieList;
-        let movieIndex = movies.findIndex((x) => x.id == movie.id);
+        const movieIndex = movies.findIndex((x) => x.id === movie.id);
         movies[movieIndex] = movie;
         this.setState({
             movieList: movies,

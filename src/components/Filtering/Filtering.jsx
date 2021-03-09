@@ -9,7 +9,7 @@ export default function Filtering(props) {
             filters = [];
         } else {
             if (filters.includes(value)) {
-                filters = filters.filter((k) => k != value);
+                filters = filters.filter((k) => k !== value);
             } else {
                 filters = [...filters, value];
             }

@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, { useState } from 'react';
 import './MovieDetailsModal.css';
 import Button from 'react-bootstrap/Button';
@@ -49,14 +47,14 @@ export default function MovieDetailsModal(props) {
     };
 
     const handleSubmit = () => {
-        let movie = {
+        const movie = {
             id: isEditing ? props.movie.id : Math.round(Date.now() / 1000), // put epoch time as id for now
-            title: title,
             release_date: releaseDate,
             poster_path: posterUrl,
-            overview: overview,
-            genres: genres,
-            runtime: runtime,
+            title,
+            overview,
+            genres,
+            runtime,
         };
         if (isEditing) {
             props.updateMovie(movie);
@@ -168,6 +166,6 @@ MovieDetailsModal.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
         overview: PropTypes.string,
-        runtime: PropTypes.number,
+        runtime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
 };
