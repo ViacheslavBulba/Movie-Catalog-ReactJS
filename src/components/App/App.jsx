@@ -18,6 +18,9 @@ export default class App extends React.Component {
         };
         this.changeOrder = this.changeOrder.bind(this);
         this.onFilterChange = this.onFilterChange.bind(this);
+        this.addMovie = this.addMovie.bind(this);
+        this.deleteMovie = this.deleteMovie.bind(this);
+        this.updateMovie = this.updateMovie.bind(this);
     }
 
     changeOrder(order) {
@@ -32,13 +35,34 @@ export default class App extends React.Component {
         });
     }
 
+    addMovie(movie) {
+        this.setState({
+            movieList: [...this.state.movieList, movie],
+        });
+    }
+
+    deleteMovie(id) {
+        this.setState({
+            movieList: this.state.movieList.filter((movie) => movie.id !== id),
+        });
+    }
+
+    updateMovie(movie) {
+        let movies = this.state.movieList;
+        const movieIndex = movies.findIndex((x) => x.id === movie.id);
+        movies[movieIndex] = movie;
+        this.setState({
+            movieList: movies,
+        });
+    }
+
     componentDidMount() {
         this.setState({
             movieList: [
                 {
                     id: 337167,
                     title: 'Fifty Shades Freed',
-                    tagline: "Don't miss the climax",
+                    tagline: 'Don\'t miss the climax',
                     vote_average: 6.1,
                     vote_count: 1195,
                     release_date: '2018-02-07',
@@ -61,7 +85,7 @@ export default class App extends React.Component {
                     poster_path:
                         'https://image.tmdb.org/t/p/w500/hlK0e0wAQ3VLuJcsfIYPvb4JVud.jpg',
                     overview:
-                        "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.",
+                        'Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia\'s police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.',
                     budget: 150000000,
                     revenue: 1023784195,
                     genres: ['Animation', 'Adventure', 'Family', 'Comedy'],
@@ -93,7 +117,7 @@ export default class App extends React.Component {
                     poster_path:
                         'https://image.tmdb.org/t/p/w500/uxzzxijgPIY7slzFvMotPv8wjKA.jpg',
                     overview:
-                        "King T'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne by factions within his own country as well as without.  Using powers reserved to Wakandan kings, T'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister,  members of the Dora Milaje (the Wakandan \"special forces\"), and an American secret agent, to prevent Wakanda from being dragged into a world war.",
+                        'King T\'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country\'s new leader. However, T\'Challa soon finds that he is challenged for the throne by factions within his own country as well as without.  Using powers reserved to Wakandan kings, T\'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister,  members of the Dora Milaje (the Wakandan "special forces"), and an American secret agent, to prevent Wakanda from being dragged into a world war.',
                     budget: 200000000,
                     revenue: 1245257672,
                     genres: [
@@ -114,7 +138,7 @@ export default class App extends React.Component {
                     poster_path:
                         'https://image.tmdb.org/t/p/w500/eKi8dIrr8voobbaGzDpe8w0PVbC.jpg',
                     overview:
-                        "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector, and together, they set off on an extraordinary journey to unlock the real story behind Miguel's family history.",
+                        'Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector, and together, they set off on an extraordinary journey to unlock the real story behind Miguel\'s family history.',
                     budget: 175000000,
                     revenue: 700920729,
                     genres: ['Adventure', 'Comedy', 'Family', 'Animation'],
@@ -178,7 +202,7 @@ export default class App extends React.Component {
                     poster_path:
                         'https://image.tmdb.org/t/p/w500/tWqifoYuwLETmmasnGHO7xBjEtt.jpg',
                     overview:
-                        "A live-action adaptation of Disney's version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell.",
+                        'A live-action adaptation of Disney\'s version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell.',
                     budget: 160000000,
                     revenue: 1263521126,
                     genres: ['Family', 'Fantasy', 'Romance'],
@@ -224,7 +248,7 @@ export default class App extends React.Component {
         return (
             <>
                 <ErrorBoundary>
-                    <Header />
+                    <Header addMovie={this.addMovie} />
                     <main className='main-container'>
                         <div className='filtering-and-sorting-container'>
                             <Filtering
@@ -237,7 +261,11 @@ export default class App extends React.Component {
                             />
                         </div>
                         <ResultsCount count={movies.length} />
-                        <MovieList movies={movies} />
+                        <MovieList
+                            movies={movies}
+                            deleteMovie={this.deleteMovie}
+                            updateMovie={this.updateMovie}
+                        />
                     </main>
                     <Footer />
                 </ErrorBoundary>

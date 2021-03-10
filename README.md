@@ -1,3 +1,9 @@
+# Adding "add movie" modal popup
+
+`npm install react-bootstrap bootstrap`
+
+`https://react-bootstrap.github.io/components/modal/`
+
 # Components home task part 1 (functional components)
 
 ## Some command used for this task

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
 import PropTypes from 'prop-types';

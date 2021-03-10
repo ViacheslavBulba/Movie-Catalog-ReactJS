@@ -8,6 +8,21 @@
     margin-right: 30px;
 }
 
+.edit-delete-icons-container {
+    font-size: 46px;
+    object-fit: contain;
+    position: absolute;
+    width: inherit;
+    padding: 20px;
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.movie-card-container:hover .edit-delete-icons-container {
+    display: flex;
+}
+
 .movie-image {
     width: 100%;
     height: 600px;

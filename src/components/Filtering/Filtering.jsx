@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Filtering.css';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ export default function Filtering(props) {
             filters = [];
         } else {
             if (filters.includes(value)) {
-                filters = filters.filter((k) => k != value);
+                filters = filters.filter((k) => k !== value);
             } else {
                 filters = [...filters, value];
             }
