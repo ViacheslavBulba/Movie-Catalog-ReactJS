@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function MovieCard(props) {
-    const [isHovering, setIsHovering] = useState(false);
-
     const [showModal, setShowModal] = useState(false);
 
     const handleCloseModal = () => {
@@ -17,24 +15,14 @@ export default function MovieCard(props) {
 
     return (
         <>
-            <div
-                className='movie-card-container'
-                onMouseOver={() => setIsHovering(true)}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-            >
-                {isHovering && (
-                    <div className='edit-delete-icons-container'>
-                        <i
-                            className='fa fa-edit'
-                            onClick={showEditMovieModal}
-                        />
-                        <i
-                            className='fa fa-trash'
-                            onClick={() => props.deleteMovie(props.movie.id)}
-                        />
-                    </div>
-                )}
+            <div className='movie-card-container'>
+                <div className='edit-delete-icons-container'>
+                    <i className='fa fa-edit' onClick={showEditMovieModal} />
+                    <i
+                        className='fa fa-trash'
+                        onClick={() => props.deleteMovie(props.movie.id)}
+                    />
+                </div>
                 <img
                     className='movie-image'
                     src={props.movie.poster_path}
