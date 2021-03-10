@@ -28,5 +28,5 @@ MovieList.propTypes = {
         }).isRequired
     ).isRequired,
     deleteMovie: PropTypes.func.isRequired,
-    updateMovie: PropTypes.func,
+    updateMovie: PropTypes.func.isRequired,
 };
