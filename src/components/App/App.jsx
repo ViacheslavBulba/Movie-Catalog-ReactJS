@@ -194,7 +194,7 @@ export default function App() {
         let movies = movieList;
         const movieIndex = movies.findIndex((x) => x.id === movie.id);
         movies[movieIndex] = movie;
-        setMovieList(movies);
+        setMovieList([...movies]);
     };
 
     let movies = movieList;
