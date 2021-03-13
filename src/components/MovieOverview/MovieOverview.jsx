@@ -3,6 +3,7 @@ import './MovieOverview.css';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import logo from '../../../public/netflix-logo.svg';
+import noPicture from '../../../public/no-picture-available.jpg';
 
 export default function MovieOverview(props) {
     return (
@@ -18,7 +19,11 @@ export default function MovieOverview(props) {
                 <div className='movie-details-container'>
                     <img
                         className='movie-image-overview'
-                        src={props.movie.poster_path}
+                        src={
+                            props.movie.poster_path === ''
+                                ? noPicture
+                                : props.movie.poster_path
+                        }
                     ></img>
                     <div className='overview-text-container'>
                         <div className='name-and-rating-container'>
