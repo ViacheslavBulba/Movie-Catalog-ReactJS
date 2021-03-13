@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 
 export default function MovieDetailsModal(props) {
-    let isEditing = props.movie ? true : false;
+    const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
     const [releaseDate, setReleaseDate] = useState(

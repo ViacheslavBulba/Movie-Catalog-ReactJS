@@ -26,6 +26,7 @@ export default function MovieCard(props) {
                 <img
                     className='movie-image'
                     src={props.movie.poster_path}
+                    onClick={() => props.showOverview(props.movie)}
                 ></img>
                 <div className='name-and-year-container'>
                     <div>{props.movie.title}</div>
@@ -58,4 +59,5 @@ MovieCard.propTypes = {
     }).isRequired,
     deleteMovie: PropTypes.func.isRequired,
     updateMovie: PropTypes.func.isRequired,
+    showOverview: PropTypes.func.isRequired,
 };
