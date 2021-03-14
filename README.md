@@ -1,3 +1,15 @@
+# Backend (Movies API Local Service)
+
+`cd ~/git/react-mentoring-program/backend`
+
+`npm i`
+
+`npm start`
+
+http://localhost:4000/api-docs
+
+Movies API Service will be available on http://localhost:4000/
+
 # Adding "add movie" modal popup
 
 `npm install react-bootstrap bootstrap`
