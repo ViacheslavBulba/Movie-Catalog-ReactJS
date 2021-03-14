@@ -19,11 +19,7 @@ export default function MovieOverview(props) {
                 <div className='movie-details-container'>
                     <img
                         className='movie-image-overview'
-                        src={
-                            props.movie.poster_path === ''
-                                ? noPicture
-                                : props.movie.poster_path
-                        }
+                        src={props.movie.poster_path || noPicture}
                     ></img>
                     <div className='overview-text-container'>
                         <div className='name-and-rating-container'>
@@ -69,14 +65,4 @@ MovieOverview.propTypes = {
         overview: PropTypes.string.isRequired,
     }).isRequired,
     closeOverview: PropTypes.func.isRequired,
-};
-
-MovieOverview.defaultProps = {
-    title: 'Missing title',
-    release_date: '2001-01-01',
-    genres: [],
-    vote_average: 0.0,
-    tagline: 'Missing tag',
-    runtime: 0,
-    overview: 'Missing overview',
 };

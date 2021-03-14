@@ -202,7 +202,7 @@ export default function App() {
         [movieList]
     );
 
-    const handleShowOverview = useCallback(
+    const changeMovieToOverview = useCallback(
         (movie) => setMovieToOverview(movie),
         [movieToOverview]
     );
@@ -233,7 +233,7 @@ export default function App() {
                 {movieToOverview ? (
                     <MovieOverview
                         movie={movieToOverview}
-                        closeOverview={() => setMovieToOverview(null)}
+                        closeOverview={() => changeMovieToOverview(null)}
                     />
                 ) : (
                     <Header addMovie={addMovie} />
@@ -252,7 +252,7 @@ export default function App() {
                         movies={filteredSortedMovies}
                         deleteMovie={deleteMovie}
                         updateMovie={updateMovie}
-                        showOverview={handleShowOverview}
+                        showOverview={changeMovieToOverview}
                     />
                 </main>
                 <Footer />

@@ -47,7 +47,7 @@ export default function MovieDetailsModal(props) {
     const handleSubmit = () => {
         const movie = {
             id: isEditing ? props.movie.id : Math.round(Date.now() / 1000), // put epoch time as id for now
-            release_date: releaseDate === '' ? '2000-01-01' : releaseDate,
+            release_date: releaseDate || '2021-01-01',
             poster_path: posterUrl,
             title,
             overview,
