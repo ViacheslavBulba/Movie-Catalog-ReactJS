@@ -19,9 +19,7 @@ export default function MovieDetailsModal(props) {
     const [overview, setOverview] = useState(
         isEditing ? props.movie.overview : ''
     );
-    const [runtime, setRuntime] = useState(
-        isEditing ? props.movie.runtime : ''
-    );
+    const [runtime, setRuntime] = useState(isEditing ? props.movie.runtime : 0);
 
     const resetFieldsOnSubmit = () => {
         setTitle(isEditing ? title : '');
@@ -55,6 +53,8 @@ export default function MovieDetailsModal(props) {
             overview,
             genres,
             runtime,
+            vote_average: isEditing ? props.movie.vote_average : 0.0,
+            tagline: isEditing ? props.movie.tagline : 'New movie',
         };
         if (isEditing) {
             props.updateMovie(movie);
@@ -165,7 +165,9 @@ MovieDetailsModal.propTypes = {
         title: PropTypes.string.isRequired,
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        overview: PropTypes.string,
-        runtime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        overview: PropTypes.string.isRequired,
+        runtime: PropTypes.number.isRequired,
+        vote_average: PropTypes.number.isRequired,
+        tagline: PropTypes.string.isRequired,
     }),
 };
