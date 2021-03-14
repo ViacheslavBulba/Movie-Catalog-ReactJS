@@ -176,13 +176,11 @@ export default function App() {
     const [genresFilter, setGenresFilter] = useState([]);
     const [movieToOverview, setMovieToOverview] = useState(null);
 
-    const changeOrder = (order) => {
-        setOrderBy(order);
-    };
+    const changeOrder = useCallback((order) => setOrderBy(order), [orderBy]);
 
-    const onFilterChange = (filters) => {
-        setGenresFilter(filters);
-    };
+    const onFilterChange = useCallback((filters) => setGenresFilter(filters), [
+        genresFilter,
+    ]);
 
     const addMovie = useCallback(
         (movie) => setMovieList([...movieList, movie]),
@@ -204,9 +202,10 @@ export default function App() {
         [movieList]
     );
 
-    const handleShowOverview = (movie) => {
-        setMovieToOverview(movie);
-    };
+    const handleShowOverview = useCallback(
+        (movie) => setMovieToOverview(movie),
+        [movieToOverview]
+    );
 
     const filteredSortedMovies = useMemo(
         () =>
