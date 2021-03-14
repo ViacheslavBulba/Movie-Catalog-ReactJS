@@ -8,10 +8,7 @@ import noPicture from '../../../public/no-picture-available.jpg';
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
+    const handleCloseModal = () => setShowModal(false);
     const showEditMovieModal = () => setShowModal(true);
 
     return (

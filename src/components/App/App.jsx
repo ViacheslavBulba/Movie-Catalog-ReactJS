@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -184,38 +184,49 @@ export default function App() {
         setGenresFilter(filters);
     };
 
-    const addMovie = (movie) => {
-        setMovieList([...movieList, movie]);
-    };
+    const addMovie = useCallback(
+        (movie) => setMovieList([...movieList, movie]),
+        [movieList]
+    );
 
-    const deleteMovie = (id) => {
-        setMovieList(movieList.filter((movie) => movie.id !== id));
-    };
+    const deleteMovie = useCallback(
+        (id) => setMovieList(movieList.filter((movie) => movie.id !== id)),
+        [movieList]
+    );
 
-    const updateMovie = (movie) => {
-        let movies = movieList;
-        const movieIndex = movies.findIndex((x) => x.id === movie.id);
-        movies[movieIndex] = movie;
-        setMovieList([...movies]);
-    };
+    const updateMovie = useCallback(
+        (movie) => {
+            let movies = movieList;
+            const movieIndex = movies.findIndex((x) => x.id === movie.id);
+            movies[movieIndex] = movie;
+            setMovieList([...movies]);
+        },
+        [movieList]
+    );
 
     const handleShowOverview = (movie) => {
         setMovieToOverview(movie);
     };
 
-    let movies = movieList;
-    movies = movies
-        .sort((a, b) => {
-            return orderBy === 'RELEASE DATE'
-                ? Date.parse(b.release_date) - Date.parse(a.release_date)
-                : a.title.localeCompare(b.title);
-        })
-        .filter((movie) => {
-            return (
-                !genresFilter.length ||
-                movie.genres.some((genre) => genresFilter.includes(genre))
-            );
-        });
+    const filteredSortedMovies = useMemo(
+        () =>
+            movieList
+                .sort((a, b) => {
+                    return orderBy === 'RELEASE DATE'
+                        ? Date.parse(b.release_date) -
+                              Date.parse(a.release_date)
+                        : a.title.localeCompare(b.title);
+                })
+                .filter((movie) => {
+                    return (
+                        !genresFilter.length ||
+                        movie.genres.some((genre) =>
+                            genresFilter.includes(genre)
+                        )
+                    );
+                }),
+        [orderBy, genresFilter, movieList]
+    );
 
     return (
         <>
@@ -237,9 +248,9 @@ export default function App() {
                         />
                         <Sorting orderBy={orderBy} changeOrder={changeOrder} />
                     </div>
-                    <ResultsCount count={movies.length} />
+                    <ResultsCount count={filteredSortedMovies.length} />
                     <MovieList
-                        movies={movies}
+                        movies={filteredSortedMovies}
                         deleteMovie={deleteMovie}
                         updateMovie={updateMovie}
                         showOverview={handleShowOverview}
