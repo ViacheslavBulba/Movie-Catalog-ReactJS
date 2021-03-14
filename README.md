@@ -10,6 +10,12 @@ http://localhost:4000/api-docs
 
 Movies API Service will be available on http://localhost:4000/
 
+# Hooks
+
+https://www.robinwieruch.de/react-usecallback-hook
+https://www.robinwieruch.de/react-usememo-hook
+https://www.robinwieruch.de/react-memo
+
 # Adding "add movie" modal popup
 
 `npm install react-bootstrap bootstrap`
