@@ -3,14 +3,12 @@ import './MovieCard.css';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
+import noPicture from '../../../public/no-picture-available.jpg';
 
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
+    const handleCloseModal = () => setShowModal(false);
     const showEditMovieModal = () => setShowModal(true);
 
     return (
@@ -25,7 +23,12 @@ export default function MovieCard(props) {
                 </div>
                 <img
                     className='movie-image'
-                    src={props.movie.poster_path}
+                    src={
+                        props.movie.poster_path === ''
+                            ? noPicture
+                            : props.movie.poster_path
+                    }
+                    onClick={() => props.showOverview(props.movie)}
                 ></img>
                 <div className='name-and-year-container'>
                     <div>{props.movie.title}</div>
@@ -58,4 +61,5 @@ MovieCard.propTypes = {
     }).isRequired,
     deleteMovie: PropTypes.func.isRequired,
     updateMovie: PropTypes.func.isRequired,
+    showOverview: PropTypes.func.isRequired,
 };

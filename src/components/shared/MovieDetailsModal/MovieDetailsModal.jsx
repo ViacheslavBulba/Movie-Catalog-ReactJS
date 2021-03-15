@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 
 export default function MovieDetailsModal(props) {
-    let isEditing = props.movie ? true : false;
+    const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
     const [releaseDate, setReleaseDate] = useState(
@@ -19,9 +19,7 @@ export default function MovieDetailsModal(props) {
     const [overview, setOverview] = useState(
         isEditing ? props.movie.overview : ''
     );
-    const [runtime, setRuntime] = useState(
-        isEditing ? props.movie.runtime : ''
-    );
+    const [runtime, setRuntime] = useState(isEditing ? props.movie.runtime : 0);
 
     const resetFieldsOnSubmit = () => {
         setTitle(isEditing ? title : '');
@@ -49,12 +47,14 @@ export default function MovieDetailsModal(props) {
     const handleSubmit = () => {
         const movie = {
             id: isEditing ? props.movie.id : Math.round(Date.now() / 1000), // put epoch time as id for now
-            release_date: releaseDate,
+            release_date: releaseDate || '2021-01-01',
             poster_path: posterUrl,
             title,
             overview,
             genres,
             runtime,
+            vote_average: isEditing ? props.movie.vote_average : 0.0,
+            tagline: isEditing ? props.movie.tagline : 'New movie',
         };
         if (isEditing) {
             props.updateMovie(movie);
@@ -165,7 +165,9 @@ MovieDetailsModal.propTypes = {
         title: PropTypes.string.isRequired,
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        overview: PropTypes.string,
-        runtime: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        overview: PropTypes.string.isRequired,
+        runtime: PropTypes.number.isRequired,
+        vote_average: PropTypes.number.isRequired,
+        tagline: PropTypes.string.isRequired,
     }),
 };

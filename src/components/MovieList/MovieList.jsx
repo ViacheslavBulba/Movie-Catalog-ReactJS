@@ -12,6 +12,7 @@ export default function MovieList(props) {
                     key={item.id}
                     deleteMovie={props.deleteMovie}
                     updateMovie={props.updateMovie}
+                    showOverview={props.showOverview}
                 />
             ))}
         </div>
@@ -29,4 +30,5 @@ MovieList.propTypes = {
     ).isRequired,
     deleteMovie: PropTypes.func.isRequired,
     updateMovie: PropTypes.func.isRequired,
+    showOverview: PropTypes.func.isRequired,
 };
