@@ -207,6 +207,10 @@ export default function App() {
         [movieToOverview]
     );
 
+    const closeOverview = useCallback(() => setMovieToOverview(null), [
+        movieToOverview,
+    ]);
+
     const filteredSortedMovies = useMemo(
         () =>
             movieList
@@ -233,7 +237,7 @@ export default function App() {
                 {movieToOverview ? (
                     <MovieOverview
                         movie={movieToOverview}
-                        closeOverview={() => changeMovieToOverview(null)}
+                        closeOverview={closeOverview}
                     />
                 ) : (
                     <Header addMovie={addMovie} />
