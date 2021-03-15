@@ -1,3 +1,11 @@
+# How to add a backend (local movies API service/server) as a dependency
+
+`npm i --save-dev git+https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS.git`
+
+`cd ~/git/react-mentoring-program/node_modules/movie-api-server`
+
+`npm start`
+
 # Hooks
 
 https://www.robinwieruch.de/react-usecallback-hook
