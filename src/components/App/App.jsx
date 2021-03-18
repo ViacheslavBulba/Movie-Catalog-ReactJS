@@ -29,7 +29,12 @@ export default function App() {
     );
 
     const deleteMovie = useCallback(
-        (id) => setMovieList(movieList.filter((movie) => movie.id !== id)),
+        (id) => {
+            setMovieList(movieList.filter((movie) => movie.id !== id));
+            fetch('http://localhost:4000/movies/' + id, {
+                method: 'DELETE',
+            });
+        },
         [movieList]
     );
 
@@ -80,17 +85,11 @@ export default function App() {
                     setIsLoaded(true);
                     setMovieList(result.data);
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
                 }
             );
-        // Note: the empty deps array [] means
-        // this useEffect will run once
-        // similar to componentDidMount()
     }, []);
 
     if (error) {
