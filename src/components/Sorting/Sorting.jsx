@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
+import PropTypes from 'prop-types';
 
 import { sortMovies } from '../../store/actions';
 import store from '../../store/store';
@@ -32,3 +33,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Sorting);
+
+Sorting.propTypes = {
+    sortBy: PropTypes.string.isRequired,
+};

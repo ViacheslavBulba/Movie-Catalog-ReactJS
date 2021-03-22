@@ -1,6 +1,6 @@
 import React from 'react';
 import './Filtering.css';
-
+import PropTypes from 'prop-types';
 import { filterByGenres } from '../../store/actions';
 import store from '../../store/store';
 import { connect } from 'react-redux';
@@ -86,3 +86,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Filtering);
+
+Filtering.propTypes = {
+    genresFilter: PropTypes.arrayOf(PropTypes.string.isRequired),
+};

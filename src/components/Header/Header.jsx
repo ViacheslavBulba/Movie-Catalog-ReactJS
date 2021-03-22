@@ -3,7 +3,7 @@ import './Header.css';
 import logo from '../../../public/netflix-logo.svg';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
-export default function Header(props) {
+export default function Header() {
     const [showModal, setShowModal] = useState(false);
 
     const handleCloseModal = () => {

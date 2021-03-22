@@ -69,4 +69,5 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
+    showOverview: PropTypes.func.isRequired,
 };
