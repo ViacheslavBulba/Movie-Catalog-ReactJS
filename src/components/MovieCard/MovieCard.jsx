@@ -22,6 +22,10 @@ export default function MovieCard(props) {
         });
     };
 
+    const addDefaultSrc = (e) => {
+        e.target.src = noPicture;
+    };
+
     return (
         <>
             <div className='movie-card-container'>
@@ -39,6 +43,7 @@ export default function MovieCard(props) {
                             ? noPicture
                             : props.movie.poster_path
                     }
+                    onError={addDefaultSrc}
                     onClick={() => props.showOverview(props.movie)}
                 ></img>
                 <div className='name-and-year-container'>

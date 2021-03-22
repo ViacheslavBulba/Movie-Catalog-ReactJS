@@ -6,6 +6,10 @@ import logo from '../../../public/netflix-logo.svg';
 import noPicture from '../../../public/no-picture-available.jpg';
 
 export default function MovieOverview(props) {
+    const addDefaultSrc = (e) => {
+        e.target.src = noPicture;
+    };
+
     return (
         <>
             <div className='overview-container'>
@@ -20,6 +24,7 @@ export default function MovieOverview(props) {
                     <img
                         className='movie-image-overview'
                         src={props.movie.poster_path || noPicture}
+                        onError={addDefaultSrc}
                     ></img>
                     <div className='overview-text-container'>
                         <div className='name-and-rating-container'>
