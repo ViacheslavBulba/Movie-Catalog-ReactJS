@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css';
 import logo from '../../../public/netflix-logo.svg';
-import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function Header(props) {
@@ -23,7 +22,6 @@ export default function Header(props) {
                 <MovieDetailsModal
                     show={showModal}
                     handleCloseModal={handleCloseModal}
-                    addMovie={props.addMovie}
                 />
             </div>
             <div className='header-text'>FIND YOUR MOVIE</div>
@@ -38,7 +36,3 @@ export default function Header(props) {
         </header>
     );
 }
-
-Header.propTypes = {
-    addMovie: PropTypes.func.isRequired,
-};

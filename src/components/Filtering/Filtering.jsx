@@ -1,8 +1,11 @@
 import React from 'react';
 import './Filtering.css';
-import PropTypes from 'prop-types';
 
-export default function Filtering(props) {
+import { filterByGenres } from '../../store/actions';
+import store from '../../store/store';
+import { connect } from 'react-redux';
+
+function Filtering(props) {
     const onFilterChange = (value) => {
         let filters = props.genresFilter;
         if (value === 'All') {
@@ -14,7 +17,7 @@ export default function Filtering(props) {
                 filters = [...filters, value];
             }
         }
-        props.onFilterChange(filters);
+        store.dispatch(filterByGenres(filters));
     };
 
     return (
@@ -76,7 +79,10 @@ export default function Filtering(props) {
     );
 }
 
-Filtering.propTypes = {
-    genresFilter: PropTypes.arrayOf(PropTypes.string.isRequired),
-    onFilterChange: PropTypes.func.isRequired,
+const mapStateToProps = (state) => {
+    return {
+        genresFilter: state.filerByGenres,
+    };
 };
+
+export default connect(mapStateToProps)(Filtering);

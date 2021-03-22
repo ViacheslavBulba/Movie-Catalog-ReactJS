@@ -4,8 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
+import noPicture from '../../../../public/no-picture-available.jpg';
 
-export default function MovieDetailsModal(props) {
+import { connect } from 'react-redux';
+import { addMovie, updateMovie } from '../../../store/actions';
+import store from '../../../store/store';
+
+function MovieDetailsModal(props) {
     const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
@@ -44,22 +49,58 @@ export default function MovieDetailsModal(props) {
         resetFieldsOnCancel();
     };
 
-    const handleSubmit = () => {
+    const handleUpdate = () => {
         const movie = {
-            id: isEditing ? props.movie.id : Math.round(Date.now() / 1000), // put epoch time as id for now
-            release_date: releaseDate || '2021-01-01',
+            id: props.movie.id,
+            release_date: releaseDate,
             poster_path: posterUrl,
             title,
             overview,
             genres,
             runtime,
-            vote_average: isEditing ? props.movie.vote_average : 0.0,
-            tagline: isEditing ? props.movie.tagline : 'New movie',
+            vote_average: props.movie.vote_average,
+            tagline: props.movie.tagline,
         };
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(movie),
+        };
+        fetch('http://localhost:4000/movies/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                store.dispatch(updateMovie(data));
+            });
+    };
+
+    const handleAdd = () => {
+        const movieToAdd = {
+            release_date: releaseDate || '2021-03-21',
+            poster_path: posterUrl || noPicture,
+            title: title || 'Some new title',
+            overview: overview || 'Some new overview',
+            genres: ['Drama'], // TODO add genres from form
+            runtime: runtime || 99,
+            vote_average: 0.0,
+            tagline: 'New movie',
+        };
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(movieToAdd),
+        };
+        fetch('http://localhost:4000/movies/', requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                store.dispatch(addMovie(data));
+            });
+    };
+
+    const handleSubmit = () => {
         if (isEditing) {
-            props.updateMovie(movie);
+            handleUpdate();
         } else {
-            props.addMovie(movie);
+            handleAdd();
         }
         props.handleCloseModal();
         resetFieldsOnSubmit();
@@ -153,6 +194,8 @@ export default function MovieDetailsModal(props) {
         </Modal>
     );
 }
+
+export default connect(null, { addMovie, updateMovie })(MovieDetailsModal);
 
 MovieDetailsModal.propTypes = {
     show: PropTypes.bool.isRequired,

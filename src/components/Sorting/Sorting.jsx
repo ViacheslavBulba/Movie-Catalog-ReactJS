@@ -1,20 +1,23 @@
 import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
-import PropTypes from 'prop-types';
 
-export default function Sorting(props) {
+import { sortMovies } from '../../store/actions';
+import store from '../../store/store';
+import { connect } from 'react-redux';
+
+function Sorting(props) {
     const sortByOptions = ['RELEASE DATE', 'NAME (A-Z)'];
 
     const onSelectionChange = (e) => {
-        props.changeOrder(e.value);
+        store.dispatch(sortMovies(e.value));
     };
 
     return (
         <div>
             <span className='dropdown-label'>SORT BY:</span>
             <Dropdown
-                value={props.orderBy}
+                value={props.sortBy}
                 options={sortByOptions}
                 onChange={onSelectionChange}
             />
@@ -22,7 +25,10 @@ export default function Sorting(props) {
     );
 }
 
-Sorting.propTypes = {
-    changeOrder: PropTypes.func.isRequired,
-    orderBy: PropTypes.string.isRequired,
+const mapStateToProps = (state) => {
+    return {
+        sortBy: state.sortBy,
+    };
 };
+
+export default connect(mapStateToProps)(Sorting);
