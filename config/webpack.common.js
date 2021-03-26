@@ -78,5 +78,11 @@ module.exports = {
 
     resolve: {
         extensions: ['.js', '.jsx']
+    },
+
+    externals: {
+        config: JSON.stringify({
+            apiUrl: 'http://localhost:4000'
+        })
     }
 };

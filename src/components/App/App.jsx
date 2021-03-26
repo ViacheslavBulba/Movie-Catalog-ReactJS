@@ -8,13 +8,12 @@ import ResultsCount from '../ResultsCount/ResultsCount';
 import MovieList from '../MovieList/MovieList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
+import { useDispatch } from 'react-redux';
 
-import store from '../../store/store';
 import {
     fetchMoviesPending,
-    fetchMoviesSuccess,
-    fetchMoviesError,
-    sortMovies,
+    thunkedFetchMoviesSuccess,
+    //sortMovies,
 } from '../../store/actions';
 
 export default function App() {
@@ -29,26 +28,22 @@ export default function App() {
         movieToOverview,
     ]);
 
-    const fetchMovies = () => {
-        store.dispatch(fetchMoviesPending());
-        fetch('http://localhost:4000/movies')
-            .then((res) => res.json())
-            .then((res) => {
-                if (res.error) {
-                    throw res.error;
-                }
-                store.dispatch(fetchMoviesSuccess(res.data));
-                store.dispatch(sortMovies('RELEASE DATE')); //TODO remove first sorting from here
-                return res.data;
-            })
-            .catch((error) => {
-                store.dispatch(fetchMoviesError(error));
-            });
+    function fetchMovies() {
+        return (dispatch) => {
+            dispatch(fetchMoviesPending());
+            dispatch(thunkedFetchMoviesSuccess());
+            //dispatch(sortMovies('RELEASE DATE')); //TODO remove first sorting from here
+        };
+    }
+
+    const useFetching = () => {
+        const dispatch = useDispatch();
+        useEffect(() => {
+            dispatch(fetchMovies());
+        }, []);
     };
 
-    useEffect(() => {
-        fetchMovies();
-    }, []);
+    useFetching();
 
     return (
         <>

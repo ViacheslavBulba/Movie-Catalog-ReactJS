@@ -9,6 +9,7 @@ import noPicture from '../../../../public/no-picture-available.jpg';
 import { connect } from 'react-redux';
 import { addMovie, updateMovie } from '../../../store/actions';
 import store from '../../../store/store';
+import config from 'config';
 
 function MovieDetailsModal(props) {
     const isEditing = props.movie ? true : false;
@@ -66,7 +67,7 @@ function MovieDetailsModal(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(movie),
         };
-        fetch('http://localhost:4000/movies/', requestOptions)
+        fetch(`${config.apiUrl}/movies/`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 store.dispatch(updateMovie(data));
@@ -89,7 +90,7 @@ function MovieDetailsModal(props) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(movieToAdd),
         };
-        fetch('http://localhost:4000/movies/', requestOptions)
+        fetch(`${config.apiUrl}/movies/`, requestOptions)
             .then((response) => response.json())
             .then((data) => {
                 store.dispatch(addMovie(data));

@@ -7,6 +7,8 @@ import noPicture from '../../../public/no-picture-available.jpg';
 
 import { deleteMovie } from '../../store/actions';
 import store from '../../store/store';
+import config from 'config';
+import axios from 'axios';
 
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
@@ -15,9 +17,7 @@ export default function MovieCard(props) {
     const showEditMovieModal = () => setShowModal(true);
 
     const handleDelete = (id) => {
-        fetch('http://localhost:4000/movies/' + id, {
-            method: 'DELETE',
-        }).then(() => {
+        axios.delete(`${config.apiUrl}/movies/${id}`).then(() => {
             store.dispatch(deleteMovie(id));
         });
     };
