@@ -1,6 +1,7 @@
 import actionType from './actionTypes'
 import config from 'config';
 import axios from 'axios';
+import { getSortBy, getSortOrder } from './reducer'
 
 export const addMovie = movie => ({
     type: actionType.ADD_MOVIE,
@@ -36,7 +37,7 @@ export const setMovies = movies => ({
 
 export const thunkedFetchMoviesSuccess = () =>
     dispatch =>
-        axios.get(`${config.apiUrl}/movies`)
+        axios.get(`${config.apiUrl}/movies?sortBy=${getSortBy}&sortOrder=${getSortOrder}`)
             .then(res => res.data)
             .then(res => {
                 if (res.error) {
@@ -61,6 +62,24 @@ export const sortMovies = sortBy => ({
         sortBy
     }
 });
+
+export const setSortBy = sortBy => dispatch => {
+    return dispatch({
+        type: actionType.SET_SORT_BY,
+        payload: {
+            sortBy
+        }
+    });
+};
+
+export const setOrderBy = orderBy => dispatch => {
+    return dispatch({
+        type: actionType.SET_ORDER_BY,
+        payload: {
+            orderBy
+        }
+    });
+};
 
 export const filterByGenres = genres => ({
     type: actionType.FILTER_BY_GENRES,

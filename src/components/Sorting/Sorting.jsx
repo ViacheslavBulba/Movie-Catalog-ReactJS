@@ -8,7 +8,10 @@ import store from '../../store/store';
 import { connect } from 'react-redux';
 
 function Sorting(props) {
-    const sortByOptions = ['RELEASE DATE', 'NAME (A-Z)'];
+    const sortByOptions = [
+        { label: 'RELEASE DATE', value: 'release_date' },
+        { label: 'NAME (A-Z)', value: 'title' },
+    ];
 
     const onSelectionChange = (e) => {
         store.dispatch(sortMovies(e.value));

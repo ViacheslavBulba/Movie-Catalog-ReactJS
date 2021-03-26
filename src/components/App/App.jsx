@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import {
     fetchMoviesPending,
     thunkedFetchMoviesSuccess,
-    //sortMovies,
+    sortMovies,
 } from '../../store/actions';
 
 export default function App() {
@@ -32,7 +32,7 @@ export default function App() {
         return (dispatch) => {
             dispatch(fetchMoviesPending());
             dispatch(thunkedFetchMoviesSuccess());
-            //dispatch(sortMovies('RELEASE DATE')); //TODO remove first sorting from here
+            dispatch(sortMovies('release_date')); //TODO remove first sorting from here
         };
     }
 

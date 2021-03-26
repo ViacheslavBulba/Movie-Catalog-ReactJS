@@ -5,7 +5,8 @@ const initialState = {
     notFilteredMovies: [],
     movies: [],
     error: null,
-    sortBy: 'RELEASE DATE',
+    sortBy: 'release_date',
+    sortOrder: 'desc',
     filerByGenres: [],
 }
 
@@ -15,20 +16,20 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 pending: true
-            }
+            };
         case actionType.FETCH_MOVIES_SUCCESS:
             return {
                 ...state,
                 pending: false,
                 movies: action.payload.movies, //TODO add sorting
                 notFilteredMovies: action.payload.movies
-            }
+            };
         case actionType.FETCH_MOVIES_ERROR:
             return {
                 ...state,
                 pending: false,
                 error: action.payload.error
-            }
+            };
         case actionType.ADD_MOVIE:
             return {
                 ...state,
@@ -58,7 +59,7 @@ export default function reducer(state = initialState, action) {
             const sortBy = action.payload.sortBy;
             let sortedMovieList = state.movies;
             sortedMovieList.sort((a, b) => {
-                return sortBy === 'RELEASE DATE'
+                return sortBy === 'release_date'
                     ? Date.parse(b.release_date) -
                     Date.parse(a.release_date)
                     : a.title.localeCompare(b.title);
@@ -66,6 +67,11 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 movies: [...sortedMovieList],
+                sortBy: action.payload.sortBy
+            };
+        case actionType.SET_SORT_BY:
+            return {
+                ...state,
                 sortBy: action.payload.sortBy
             };
         case actionType.FILTER_BY_GENRES:
@@ -88,3 +94,6 @@ export default function reducer(state = initialState, action) {
             return state;
     }
 }
+
+export const getSortBy = state => state.sortBy;
+export const getSortOrder = state => state.sortOrder;
