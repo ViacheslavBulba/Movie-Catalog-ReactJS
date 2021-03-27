@@ -94,6 +94,3 @@ export default function reducer(state = initialState, action) {
             return state;
     }
 }
-
-export const getSortBy = state => state.sortBy;
-export const getSortOrder = state => state.sortOrder;

@@ -9,6 +9,7 @@ import MovieList from '../MovieList/MovieList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
 import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
     fetchMoviesPending,
@@ -16,7 +17,7 @@ import {
     sortMovies,
 } from '../../store/actions';
 
-export default function App() {
+function App(props) {
     const [movieToOverview, setMovieToOverview] = useState(null);
 
     const changeMovieToOverview = useCallback(
@@ -31,8 +32,8 @@ export default function App() {
     function fetchMovies() {
         return (dispatch) => {
             dispatch(fetchMoviesPending());
-            dispatch(thunkedFetchMoviesSuccess());
-            dispatch(sortMovies('release_date')); //TODO remove first sorting from here
+            dispatch(thunkedFetchMoviesSuccess(props.sortBy, props.sortOrder));
+            //dispatch(sortMovies('release_date')); //TODO remove first sorting from here
         };
     }
 
@@ -70,3 +71,10 @@ export default function App() {
         </>
     );
 }
+
+const mapStateToProps = (state) => ({
+    sortBy: state.sortBy,
+    sortOrder: state.sortOrder,
+});
+
+export default connect(mapStateToProps)(App);

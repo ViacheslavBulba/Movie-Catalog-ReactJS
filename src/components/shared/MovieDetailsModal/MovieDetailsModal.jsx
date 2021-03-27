@@ -24,7 +24,9 @@ function MovieDetailsModal(props) {
     const [overview, setOverview] = useState(
         isEditing ? props.movie.overview : ''
     );
-    const [runtime, setRuntime] = useState(isEditing ? props.movie.runtime : 0);
+    const [runtime, setRuntime] = useState(
+        isEditing && props.movie.runtime !== null ? props.movie.runtime : 0
+    );
 
     const resetFieldsOnSubmit = () => {
         setTitle(isEditing ? title : '');
@@ -59,7 +61,7 @@ function MovieDetailsModal(props) {
             genres,
             runtime,
             vote_average: props.movie.vote_average,
-            tagline: props.movie.tagline,
+            tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from backend and sending back as empty, so putting some not empty value here
         };
         store.dispatch(thunkedUpdateMovie(movie));
     };
@@ -189,7 +191,7 @@ MovieDetailsModal.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
         overview: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
+        runtime: PropTypes.number,
         vote_average: PropTypes.number.isRequired,
         tagline: PropTypes.string.isRequired,
     }),
