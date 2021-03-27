@@ -80,11 +80,12 @@ function MovieDetailsModal(props) {
             poster_path: posterUrl || noPicture,
             title: title || 'Some new title',
             overview: overview || 'Some new overview',
-            genres: ['Drama'], // TODO add genres from form
+            genres: genres.length === 0 ? ['Drama'] : genres,
             runtime: runtime || 99,
             vote_average: 0.0,
             tagline: 'New movie',
         };
+        console.log(movieToAdd);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
