@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 import noPicture from '../../../public/no-picture-available.jpg';
 
-import { deleteMovie } from '../../store/actions';
+import { thunkedDeleteMovie } from '../../store/actions';
 import store from '../../store/store';
-import config from 'config';
-import axios from 'axios';
 
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
@@ -17,9 +15,7 @@ export default function MovieCard(props) {
     const showEditMovieModal = () => setShowModal(true);
 
     const handleDelete = (id) => {
-        axios.delete(`${config.apiUrl}/movies/${id}`).then(() => {
-            store.dispatch(deleteMovie(id));
-        });
+        store.dispatch(thunkedDeleteMovie(id));
     };
 
     const addDefaultSrc = (e) => {

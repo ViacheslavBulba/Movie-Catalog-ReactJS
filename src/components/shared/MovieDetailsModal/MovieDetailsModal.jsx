@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import noPicture from '../../../../public/no-picture-available.jpg';
 
 import { connect } from 'react-redux';
-import { addMovie, updateMovie } from '../../../store/actions';
+import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
 import store from '../../../store/store';
-import config from 'config';
 
 function MovieDetailsModal(props) {
     const isEditing = props.movie ? true : false;
@@ -62,16 +61,7 @@ function MovieDetailsModal(props) {
             vote_average: props.movie.vote_average,
             tagline: props.movie.tagline,
         };
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(movie),
-        };
-        fetch(`${config.apiUrl}/movies/`, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                store.dispatch(updateMovie(data));
-            });
+        store.dispatch(thunkedUpdateMovie(movie));
     };
 
     const handleAdd = () => {
@@ -85,17 +75,7 @@ function MovieDetailsModal(props) {
             vote_average: 0.0,
             tagline: 'New movie',
         };
-        console.log(movieToAdd);
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(movieToAdd),
-        };
-        fetch(`${config.apiUrl}/movies/`, requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
-                store.dispatch(addMovie(data));
-            });
+        store.dispatch(thunkedAddMovie(movieToAdd));
     };
 
     const handleSubmit = () => {
@@ -197,13 +177,11 @@ function MovieDetailsModal(props) {
     );
 }
 
-export default connect(null, { addMovie, updateMovie })(MovieDetailsModal);
+export default connect()(MovieDetailsModal);
 
 MovieDetailsModal.propTypes = {
     show: PropTypes.bool.isRequired,
     handleCloseModal: PropTypes.func.isRequired,
-    addMovie: PropTypes.func,
-    updateMovie: PropTypes.func,
     movie: PropTypes.shape({
         id: PropTypes.number,
         poster_path: PropTypes.string.isRequired,

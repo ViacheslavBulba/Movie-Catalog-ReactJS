@@ -10,6 +10,13 @@ export const addMovie = movie => ({
     }
 });
 
+export const thunkedAddMovie = movie =>
+    dispatch =>
+        axios.post(`${config.apiUrl}/movies/`, movie)
+            .then((response) => {
+                dispatch(addMovie(response.data));
+            });
+
 export const deleteMovie = id => ({
     type: actionType.DELETE_MOVIE,
     payload: {
@@ -17,12 +24,28 @@ export const deleteMovie = id => ({
     }
 });
 
+export const thunkedDeleteMovie = id =>
+    dispatch =>
+        axios.delete(`${config.apiUrl}/movies/${id}`).then(() => {
+            dispatch(deleteMovie(id));
+        });
+
 export const updateMovie = movie => ({
     type: actionType.UPDATE_MOVIE,
     payload: {
         movie
     }
 });
+
+export const thunkedUpdateMovie = movie =>
+    dispatch =>
+        axios.put(`${config.apiUrl}/movies/`, movie)
+            .then((response) => {
+                console.log(response);
+            })
+            .then(() => {
+                dispatch(updateMovie(movie));
+            });
 
 export const fetchMoviesPending = () => ({
     type: actionType.FETCH_MOVIES_PENDING
