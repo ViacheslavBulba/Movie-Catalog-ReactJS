@@ -39,15 +39,14 @@ export const thunkedSetMovies = () =>
     dispatch =>
         axios.get(`${config.apiUrl}/movies`, {
             params: {
+                searchBy: store.getState().searchBy,
+                filter: store.getState().filerByGenres.join(),
+                search: store.getState().search,
                 sortBy: store.getState().sortBy,
                 sortOrder: store.getState().sortOrder,
-                filter: store.getState().filerByGenres.join('%2C'),
-                searchBy: store.getState().searchBy,
-                search: store.getState().search,
             },
         })
             .then(response => {
-                // console.log(response); // left commented for debug purpose
                 dispatch(setMovies(response.data.data));
             })
             .catch(error => {
