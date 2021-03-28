@@ -3,7 +3,11 @@ import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
 import PropTypes from 'prop-types';
 
-import { sortMovies } from '../../store/actions';
+import {
+    setSortBy,
+    setSortOrder,
+    thunkedFetchMoviesSuccessWithoutParameters,
+} from '../../store/actions';
 import store from '../../store/store';
 import { connect } from 'react-redux';
 
@@ -14,7 +18,13 @@ function Sorting(props) {
     ];
 
     const onSelectionChange = (e) => {
-        store.dispatch(sortMovies(e.value));
+        store.dispatch(setSortBy(e.value));
+        if (e.value === 'title') {
+            store.dispatch(setSortOrder('asc'));
+        } else {
+            store.dispatch(setSortOrder('desc'));
+        }
+        store.dispatch(thunkedFetchMoviesSuccessWithoutParameters());
     };
 
     return (
@@ -32,6 +42,7 @@ function Sorting(props) {
 const mapStateToProps = (state) => {
     return {
         sortBy: state.sortBy,
+        sortOrder: state.sortOrder,
     };
 };
 

@@ -1,40 +1,21 @@
 import actionType from './actionTypes'
 import config from 'config';
 import axios from 'axios';
-
-export const addMovie = movie => ({
-    type: actionType.ADD_MOVIE,
-    payload: {
-        movie
-    }
-});
+import store from './store';
 
 export const thunkedAddMovie = movie =>
     dispatch =>
         axios.post(`${config.apiUrl}/movies/`, movie)
-            .then((response) => {
-                dispatch(addMovie(response.data));
+            .then(() => {
+                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
             });
-
-export const deleteMovie = id => ({
-    type: actionType.DELETE_MOVIE,
-    payload: {
-        id
-    }
-});
 
 export const thunkedDeleteMovie = id =>
     dispatch =>
-        axios.delete(`${config.apiUrl}/movies/${id}`).then(() => {
-            dispatch(deleteMovie(id));
-        });
-
-export const updateMovie = movie => ({
-    type: actionType.UPDATE_MOVIE,
-    payload: {
-        movie
-    }
-});
+        axios.delete(`${config.apiUrl}/movies/${id}`)
+            .then(() => {
+                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+            });
 
 export const thunkedUpdateMovie = movie =>
     dispatch =>
@@ -43,7 +24,7 @@ export const thunkedUpdateMovie = movie =>
             //     console.log(response);
             // })
             .then(() => {
-                dispatch(updateMovie(movie));
+                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
             });
 
 export const fetchMoviesPending = () => ({
@@ -51,15 +32,15 @@ export const fetchMoviesPending = () => ({
 });
 
 export const setMovies = movies => ({
-    type: actionType.FETCH_MOVIES_SUCCESS,
+    type: actionType.SET_MOVIES,
     payload: {
         movies
     }
 });
 
-export const thunkedFetchMoviesSuccess = (sortBy, sortOrder) =>
+export const thunkedFetchMoviesSuccessWithoutParameters = () =>
     dispatch =>
-        axios.get(`${config.apiUrl}/movies?sortBy=${sortBy}&sortOrder=${sortOrder}`)
+        axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}`)
             .then(response => {
                 console.log(response);
                 dispatch(setMovies(response.data.data))
@@ -75,30 +56,19 @@ export const fetchMoviesError = error => ({
     }
 });
 
-export const sortMovies = sortBy => ({
-    type: actionType.SORT_MOVIES,
+export const setSortBy = sortBy => ({
+    type: actionType.SET_SORT_BY,
     payload: {
         sortBy
     }
 });
 
-export const setSortBy = sortBy => dispatch => {
-    return dispatch({
-        type: actionType.SET_SORT_BY,
-        payload: {
-            sortBy
-        }
-    });
-};
-
-export const setOrderBy = orderBy => dispatch => {
-    return dispatch({
-        type: actionType.SET_ORDER_BY,
-        payload: {
-            orderBy
-        }
-    });
-};
+export const setSortOrder = sortOrder => ({
+    type: actionType.SET_SORT_ORDER,
+    payload: {
+        sortOrder
+    }
+});
 
 export const filterByGenres = genres => ({
     type: actionType.FILTER_BY_GENRES,
