@@ -1,4 +1,4 @@
-import actionType from './actionTypes'
+import actionType from './actionTypes';
 import config from 'config';
 import axios from 'axios';
 import store from './store';
@@ -40,7 +40,7 @@ export const thunkedSetMovies = () =>
         axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}${store.getState().filerByGenres.length === 0 ? '' : '&filter=' + store.getState().filerByGenres.join('%2C')}`)
             .then(response => {
                 // console.log(response); // left commented for debug purpose
-                dispatch(setMovies(response.data.data))
+                dispatch(setMovies(response.data.data));
             })
             .catch(error => {
                 dispatch(fetchMoviesError(error));
