@@ -37,7 +37,15 @@ export const setMovies = movies => ({
 
 export const thunkedSetMovies = () =>
     dispatch =>
-        axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}${store.getState().filerByGenres.length === 0 ? '' : '&filter=' + store.getState().filerByGenres.join('%2C')}`)
+        axios.get(`${config.apiUrl}/movies`, {
+            params: {
+                sortBy: store.getState().sortBy,
+                sortOrder: store.getState().sortOrder,
+                filter: store.getState().filerByGenres.join('%2C'),
+                searchBy: store.getState().searchBy,
+                search: store.getState().search,
+            },
+        })
             .then(response => {
                 // console.log(response); // left commented for debug purpose
                 dispatch(setMovies(response.data.data));
@@ -71,5 +79,19 @@ export const setFilterByGenres = genres => ({
     type: actionType.SET_FILTER_BY_GENRES,
     payload: {
         genres
+    }
+});
+
+export const setSearch = search => ({
+    type: actionType.SET_SEARCH,
+    payload: {
+        search
+    }
+});
+
+export const setSearchBy = searchBy => ({
+    type: actionType.SET_SEARCH_BY,
+    payload: {
+        searchBy
     }
 });

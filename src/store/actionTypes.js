@@ -5,6 +5,8 @@ const actionType = {
     SET_FILTER_BY_GENRES: 'SET_FILTER_BY_GENRES',
     SET_SORT_BY: 'SET_SORT_BY',
     SET_SORT_ORDER: 'SET_SORT_ORDER',
+    SET_SEARCH: 'SET_SEARCH',
+    SET_SEARCH_BY: 'SET_SEARCH_BY',
 };
 
 export default actionType;
