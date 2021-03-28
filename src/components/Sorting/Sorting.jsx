@@ -1,13 +1,14 @@
 import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
-import PropTypes from 'prop-types';
 
 import { setSortBy, setSortOrder, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function Sorting(props) {
+export default function Sorting() {
+    const sortBy = useSelector((state) => state.sortBy);
+
     const sortByOptions = [
         { label: 'RELEASE DATE', value: 'release_date' },
         { label: 'NAME (A-Z)', value: 'title' },
@@ -27,23 +28,10 @@ function Sorting(props) {
         <div>
             <span className='dropdown-label'>SORT BY:</span>
             <Dropdown
-                value={props.sortBy}
+                value={sortBy}
                 options={sortByOptions}
                 onChange={onSelectionChange}
             />
         </div>
     );
 }
-
-const mapStateToProps = (state) => {
-    return {
-        sortBy: state.sortBy,
-        sortOrder: state.sortOrder,
-    };
-};
-
-export default connect(mapStateToProps)(Sorting);
-
-Sorting.propTypes = {
-    sortBy: PropTypes.string.isRequired,
-};

@@ -1,13 +1,14 @@
 import React from 'react';
 import './Filtering.css';
-import PropTypes from 'prop-types';
 import { setFilterByGenres, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function Filtering(props) {
+export default function Filtering() {
+    const genresFilter = useSelector((state) => state.filerByGenres);
+
     const onFilterChange = (value) => {
-        let filters = props.genresFilter;
+        let filters = genresFilter;
         if (value === 'All') {
             filters = [];
         } else {
@@ -26,7 +27,7 @@ function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.length === 0 ? 'filter-active' : '')
+                    (genresFilter.length === 0 ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('All')}
             >
@@ -35,9 +36,7 @@ function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Drama')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Drama') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Drama')}
             >
@@ -46,9 +45,7 @@ function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Fantasy')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Fantasy') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Fantasy')}
             >
@@ -57,9 +54,7 @@ function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Comedy')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Comedy') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Comedy')}
             >
@@ -68,9 +63,7 @@ function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Action')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Action') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Action')}
             >
@@ -79,15 +72,3 @@ function Filtering(props) {
         </div>
     );
 }
-
-const mapStateToProps = (state) => {
-    return {
-        genresFilter: state.filerByGenres,
-    };
-};
-
-export default connect(mapStateToProps)(Filtering);
-
-Filtering.propTypes = {
-    genresFilter: PropTypes.arrayOf(PropTypes.string.isRequired),
-};

@@ -5,12 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import noPicture from '../../../../public/no-picture-available.jpg';
-
-import { connect } from 'react-redux';
 import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
 import store from '../../../store/store';
 
-function MovieDetailsModal(props) {
+export default function MovieDetailsModal(props) {
     const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
@@ -178,8 +176,6 @@ function MovieDetailsModal(props) {
         </Modal>
     );
 }
-
-export default connect()(MovieDetailsModal);
 
 MovieDetailsModal.propTypes = {
     show: PropTypes.bool.isRequired,
