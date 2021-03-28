@@ -10,10 +10,7 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
 import { useDispatch } from 'react-redux';
 
-import {
-    fetchMoviesPending,
-    thunkedFetchMoviesSuccessWithoutParameters,
-} from '../../store/actions';
+import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';
 
 export default function App() {
     const [movieToOverview, setMovieToOverview] = useState(null);
@@ -30,7 +27,7 @@ export default function App() {
     function fetchMovies() {
         return (dispatch) => {
             dispatch(fetchMoviesPending());
-            dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+            dispatch(thunkedSetMovies());
         };
     }
 

@@ -7,14 +7,14 @@ export const thunkedAddMovie = movie =>
     dispatch =>
         axios.post(`${config.apiUrl}/movies/`, movie)
             .then(() => {
-                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+                dispatch(thunkedSetMovies());
             });
 
 export const thunkedDeleteMovie = id =>
     dispatch =>
         axios.delete(`${config.apiUrl}/movies/${id}`)
             .then(() => {
-                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+                dispatch(thunkedSetMovies());
             });
 
 export const thunkedUpdateMovie = movie =>
@@ -24,7 +24,7 @@ export const thunkedUpdateMovie = movie =>
             //     console.log(response);
             // })
             .then(() => {
-                dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+                dispatch(thunkedSetMovies());
             });
 
 export const fetchMoviesPending = () => ({
@@ -38,7 +38,7 @@ export const setMovies = movies => ({
     }
 });
 
-export const thunkedFetchMoviesSuccessWithoutParameters = () =>
+export const thunkedSetMovies = () =>
     dispatch =>
         axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}`)
             .then(response => {

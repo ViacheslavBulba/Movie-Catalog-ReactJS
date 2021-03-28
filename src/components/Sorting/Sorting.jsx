@@ -3,11 +3,7 @@ import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
 import PropTypes from 'prop-types';
 
-import {
-    setSortBy,
-    setSortOrder,
-    thunkedFetchMoviesSuccessWithoutParameters,
-} from '../../store/actions';
+import { setSortBy, setSortOrder, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
 import { connect } from 'react-redux';
 
@@ -24,7 +20,7 @@ function Sorting(props) {
         } else {
             store.dispatch(setSortOrder('desc'));
         }
-        store.dispatch(thunkedFetchMoviesSuccessWithoutParameters());
+        store.dispatch(thunkedSetMovies());
     };
 
     return (
