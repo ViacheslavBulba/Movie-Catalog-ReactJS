@@ -61,7 +61,7 @@ function MovieDetailsModal(props) {
             genres,
             runtime,
             vote_average: props.movie.vote_average,
-            tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from backend and sending back as empty, so putting some not empty value here
+            tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from the backend and sending back as is empty, so putting some not empty value here
         };
         store.dispatch(thunkedUpdateMovie(movie));
     };

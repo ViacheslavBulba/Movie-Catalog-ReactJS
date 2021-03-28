@@ -65,5 +65,3 @@ export default function App() {
         </>
     );
 }
-
-//export default connect(mapStateToProps)(App);

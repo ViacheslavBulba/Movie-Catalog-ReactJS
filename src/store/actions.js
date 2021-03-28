@@ -20,9 +20,6 @@ export const thunkedDeleteMovie = id =>
 export const thunkedUpdateMovie = movie =>
     dispatch =>
         axios.put(`${config.apiUrl}/movies/`, movie)
-            // .then((response) => {
-            //     console.log(response);
-            // })
             .then(() => {
                 dispatch(thunkedSetMovies());
             });
@@ -40,9 +37,9 @@ export const setMovies = movies => ({
 
 export const thunkedSetMovies = () =>
     dispatch =>
-        axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}`)
+        axios.get(`${config.apiUrl}/movies?sortBy=${store.getState().sortBy}&sortOrder=${store.getState().sortOrder}${store.getState().filerByGenres.length === 0 ? '' : '&filter=' + store.getState().filerByGenres.join('%2C')}`)
             .then(response => {
-                console.log(response);
+                // console.log(response); // left commented for debug purpose
                 dispatch(setMovies(response.data.data))
             })
             .catch(error => {
@@ -70,8 +67,8 @@ export const setSortOrder = sortOrder => ({
     }
 });
 
-export const filterByGenres = genres => ({
-    type: actionType.FILTER_BY_GENRES,
+export const setFilterByGenres = genres => ({
+    type: actionType.SET_FILTER_BY_GENRES,
     payload: {
         genres
     }

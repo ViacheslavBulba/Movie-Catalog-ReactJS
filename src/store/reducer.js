@@ -38,20 +38,9 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 sortOrder: action.payload.sortOrder
             };
-        case actionType.FILTER_BY_GENRES: // TODO remove?
-            const genresFilter = action.payload.genres;
-            let filteredMovieList = state.notFilteredMovies;
-            filteredMovieList = filteredMovieList.filter((movie) => {
-                return (
-                    !genresFilter.length ||
-                    movie.genres.some((genre) =>
-                        genresFilter.includes(genre)
-                    )
-                );
-            });
+        case actionType.SET_FILTER_BY_GENRES:
             return {
                 ...state,
-                movies: [...filteredMovieList],
                 filerByGenres: action.payload.genres
             };
         default:

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Filtering.css';
 import PropTypes from 'prop-types';
-import { filterByGenres } from '../../store/actions';
+import { setFilterByGenres, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
 import { connect } from 'react-redux';
 
@@ -17,7 +17,8 @@ function Filtering(props) {
                 filters = [...filters, value];
             }
         }
-        store.dispatch(filterByGenres(filters));
+        store.dispatch(setFilterByGenres(filters));
+        store.dispatch(thunkedSetMovies());
     };
 
     return (
