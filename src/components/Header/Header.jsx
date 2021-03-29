@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 import './Header.css';
 import logo from '../../../public/netflix-logo.svg';
-import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
+import { setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
+import store from '../../store/store';
 
-export default function Header(props) {
+export default function Header() {
     const [showModal, setShowModal] = useState(false);
+
+    const [searchValue, setSearchValue] = useState('');
 
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
     const showAddMovieModal = () => setShowModal(true);
+
+    const handleSearch = () => {
+        store.dispatch(setSearch(searchValue));
+        store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
+        store.dispatch(thunkedSetMovies());
+    };
 
     return (
         <header className='header-container'>
@@ -23,7 +32,6 @@ export default function Header(props) {
                 <MovieDetailsModal
                     show={showModal}
                     handleCloseModal={handleCloseModal}
-                    addMovie={props.addMovie}
                 />
             </div>
             <div className='header-text'>FIND YOUR MOVIE</div>
@@ -32,13 +40,16 @@ export default function Header(props) {
                     type='text'
                     placeholder='What do you want to watch?'
                     className='search-input'
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <button className='search-button'>SEARCH</button>
+                <button
+                    className='search-button'
+                    onClick={() => handleSearch()}
+                >
+                    SEARCH
+                </button>
             </div>
         </header>
     );
 }
-
-Header.propTypes = {
-    addMovie: PropTypes.func.isRequired,
-};

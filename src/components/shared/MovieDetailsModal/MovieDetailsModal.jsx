@@ -4,8 +4,26 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
+import noPicture from '../../../../public/no-picture-available.jpg';
+import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
+import store from '../../../store/store';
+import { MultiSelect } from 'primereact/multiselect';
 
 export default function MovieDetailsModal(props) {
+    const allGenres = [
+        'Fantasy',
+        'Drama',
+        'Action',
+        'Comedy',
+        'Crime',
+        'Science Fiction',
+        'Adventure',
+        'Thriller',
+        'Family',
+        'Documentary',
+        'Horror',
+    ];
+
     const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
@@ -19,7 +37,9 @@ export default function MovieDetailsModal(props) {
     const [overview, setOverview] = useState(
         isEditing ? props.movie.overview : ''
     );
-    const [runtime, setRuntime] = useState(isEditing ? props.movie.runtime : 0);
+    const [runtime, setRuntime] = useState(
+        isEditing && props.movie.runtime !== null ? props.movie.runtime : 0
+    );
 
     const resetFieldsOnSubmit = () => {
         setTitle(isEditing ? title : '');
@@ -44,22 +64,40 @@ export default function MovieDetailsModal(props) {
         resetFieldsOnCancel();
     };
 
-    const handleSubmit = () => {
+    const handleUpdate = () => {
         const movie = {
-            id: isEditing ? props.movie.id : Math.round(Date.now() / 1000), // put epoch time as id for now
-            release_date: releaseDate || '2021-01-01',
+            id: props.movie.id,
+            release_date: releaseDate,
             poster_path: posterUrl,
             title,
             overview,
             genres,
             runtime,
-            vote_average: isEditing ? props.movie.vote_average : 0.0,
-            tagline: isEditing ? props.movie.tagline : 'New movie',
+            vote_average: props.movie.vote_average,
+            tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from the backend and sending back as is empty, so putting some not empty value here
         };
+        store.dispatch(thunkedUpdateMovie(movie));
+    };
+
+    const handleAdd = () => {
+        const movieToAdd = {
+            release_date: releaseDate || '2021-03-21',
+            poster_path: posterUrl || noPicture,
+            title: title || 'Some new title',
+            overview: overview || 'Some new overview',
+            genres: genres.length === 0 ? ['Drama'] : genres,
+            runtime: runtime || 99,
+            vote_average: 0.0,
+            tagline: 'New movie',
+        };
+        store.dispatch(thunkedAddMovie(movieToAdd));
+    };
+
+    const handleSubmit = () => {
         if (isEditing) {
-            props.updateMovie(movie);
+            handleUpdate();
         } else {
-            props.addMovie(movie);
+            handleAdd();
         }
         props.handleCloseModal();
         resetFieldsOnSubmit();
@@ -109,16 +147,12 @@ export default function MovieDetailsModal(props) {
                 </div>
                 <div className='dialog-field-container'>
                     <span className='dialog-field-label'>Genres</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Genres here using <,>'
-                        className='dialog-field-input'
+                    <MultiSelect
                         value={genres}
-                        onChange={(e) =>
-                            setGenres(
-                                e.target.value.replaceAll(', ', ',').split(',')
-                            )
-                        }
+                        options={allGenres}
+                        maxSelectedLabels={11}
+                        onChange={(e) => setGenres(e.value)}
+                        placeholder='Select Genres'
                     />
                 </div>
                 <div className='dialog-field-container'>
@@ -157,8 +191,6 @@ export default function MovieDetailsModal(props) {
 MovieDetailsModal.propTypes = {
     show: PropTypes.bool.isRequired,
     handleCloseModal: PropTypes.func.isRequired,
-    addMovie: PropTypes.func,
-    updateMovie: PropTypes.func,
     movie: PropTypes.shape({
         id: PropTypes.number,
         poster_path: PropTypes.string.isRequired,
@@ -166,7 +198,7 @@ MovieDetailsModal.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
         overview: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
+        runtime: PropTypes.number,
         vote_average: PropTypes.number.isRequired,
         tagline: PropTypes.string.isRequired,
     }),

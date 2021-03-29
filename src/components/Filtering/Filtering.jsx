@@ -1,10 +1,14 @@
 import React from 'react';
 import './Filtering.css';
-import PropTypes from 'prop-types';
+import { setFilterByGenres, thunkedSetMovies } from '../../store/actions';
+import store from '../../store/store';
+import { useSelector } from 'react-redux';
 
-export default function Filtering(props) {
+export default function Filtering() {
+    const genresFilter = useSelector((state) => state.filerByGenres);
+
     const onFilterChange = (value) => {
-        let filters = props.genresFilter;
+        let filters = genresFilter;
         if (value === 'All') {
             filters = [];
         } else {
@@ -14,7 +18,8 @@ export default function Filtering(props) {
                 filters = [...filters, value];
             }
         }
-        props.onFilterChange(filters);
+        store.dispatch(setFilterByGenres(filters));
+        store.dispatch(thunkedSetMovies());
     };
 
     return (
@@ -22,7 +27,7 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.length === 0 ? 'filter-active' : '')
+                    (genresFilter.length === 0 ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('All')}
             >
@@ -31,9 +36,7 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Drama')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Drama') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Drama')}
             >
@@ -42,9 +45,7 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Fantasy')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Fantasy') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Fantasy')}
             >
@@ -53,9 +54,7 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Comedy')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Comedy') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Comedy')}
             >
@@ -64,9 +63,7 @@ export default function Filtering(props) {
             <button
                 className={
                     'filter-option ' +
-                    (props.genresFilter.includes('Action')
-                        ? 'filter-active'
-                        : '')
+                    (genresFilter.includes('Action') ? 'filter-active' : '')
                 }
                 onClick={() => onFilterChange('Action')}
             >
@@ -75,8 +72,3 @@ export default function Filtering(props) {
         </div>
     );
 }
-
-Filtering.propTypes = {
-    genresFilter: PropTypes.arrayOf(PropTypes.string.isRequired),
-    onFilterChange: PropTypes.func.isRequired,
-};

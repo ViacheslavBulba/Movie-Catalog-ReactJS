@@ -1,17 +1,13 @@
-
 import React from 'react';
 import './ResultsCount.css';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-export default function ResultsCount(props) {
+export default function ResultsCount() {
+    const count = useSelector((state) => state.movies.length);
 
     return (
-        <div className="result-count-container">
-            <b>{props.count}</b> movies found
+        <div className='result-count-container'>
+            <b>{count}</b> movies found
         </div>
     );
 }
-
-ResultsCount.propTypes = {
-    count: PropTypes.number.isRequired,
-};

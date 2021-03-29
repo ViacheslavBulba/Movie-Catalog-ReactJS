@@ -5,11 +5,22 @@ import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 import noPicture from '../../../public/no-picture-available.jpg';
 
+import { thunkedDeleteMovie } from '../../store/actions';
+import store from '../../store/store';
+
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
 
     const handleCloseModal = () => setShowModal(false);
     const showEditMovieModal = () => setShowModal(true);
+
+    const handleDelete = (id) => {
+        store.dispatch(thunkedDeleteMovie(id));
+    };
+
+    const addDefaultSrc = (e) => {
+        e.target.src = noPicture;
+    };
 
     return (
         <>
@@ -18,7 +29,7 @@ export default function MovieCard(props) {
                     <i className='fa fa-edit' onClick={showEditMovieModal} />
                     <i
                         className='fa fa-trash'
-                        onClick={() => props.deleteMovie(props.movie.id)}
+                        onClick={() => handleDelete(props.movie.id)}
                     />
                 </div>
                 <img
@@ -28,6 +39,7 @@ export default function MovieCard(props) {
                             ? noPicture
                             : props.movie.poster_path
                     }
+                    onError={addDefaultSrc}
                     onClick={() => props.showOverview(props.movie)}
                 ></img>
                 <div className='name-and-year-container'>
@@ -45,7 +57,6 @@ export default function MovieCard(props) {
                 show={showModal}
                 handleCloseModal={handleCloseModal}
                 movie={props.movie}
-                updateMovie={props.updateMovie}
             />
         </>
     );
@@ -59,7 +70,5 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
-    deleteMovie: PropTypes.func.isRequired,
-    updateMovie: PropTypes.func.isRequired,
     showOverview: PropTypes.func.isRequired,
 };
