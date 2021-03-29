@@ -7,8 +7,23 @@ import PropTypes from 'prop-types';
 import noPicture from '../../../../public/no-picture-available.jpg';
 import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
 import store from '../../../store/store';
+import { MultiSelect } from 'primereact/multiselect';
 
 export default function MovieDetailsModal(props) {
+    const allGenres = [
+        'Fantasy',
+        'Drama',
+        'Action',
+        'Comedy',
+        'Crime',
+        'Science Fiction',
+        'Adventure',
+        'Thriller',
+        'Family',
+        'Documentary',
+        'Horror',
+    ];
+
     const isEditing = props.movie ? true : false;
 
     const [title, setTitle] = useState(isEditing ? props.movie.title : '');
@@ -132,16 +147,12 @@ export default function MovieDetailsModal(props) {
                 </div>
                 <div className='dialog-field-container'>
                     <span className='dialog-field-label'>Genres</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Genres here using <,>'
-                        className='dialog-field-input'
+                    <MultiSelect
                         value={genres}
-                        onChange={(e) =>
-                            setGenres(
-                                e.target.value.replaceAll(', ', ',').split(',')
-                            )
-                        }
+                        options={allGenres}
+                        maxSelectedLabels={11}
+                        onChange={(e) => setGenres(e.value)}
+                        placeholder='Select Genres'
                     />
                 </div>
                 <div className='dialog-field-container'>
