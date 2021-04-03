@@ -244,10 +244,10 @@ export default function MovieDetailsModal(props) {
                 <Modal.Footer>
                     <Button
                         variant='secondary'
-                        onClick={handleClose}
+                        onClick={formik.handleReset}
                         type='button'
                     >
-                        Close
+                        Reset
                     </Button>
                     <Button variant='primary' type='submit'>
                         Submit
