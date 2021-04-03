@@ -39,10 +39,23 @@
     border: solid 1px #d9dbe3 !important;
 }
 
+.dialog-field-container .p-component.red-border {
+    border: solid 1px #f80202 !important;
+}
+
 .dialog-field-container .p-highlight {
     background-color: #ffffff !important;
 }
 
 .dialog-field-container .p-checkbox-icon {
     color: #000000 !important;
+}
+
+.error {
+    color: #f80202;
+    font-size: 14px;
+}
+
+.red-border {
+    border: solid 1px #f80202 !important;
 }
