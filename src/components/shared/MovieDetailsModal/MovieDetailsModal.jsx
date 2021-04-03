@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './MovieDetailsModal.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-import noPicture from '../../../../public/no-picture-available.jpg';
 import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
 import store from '../../../store/store';
 import { MultiSelect } from 'primereact/multiselect';
+import { useFormik } from 'formik';
 
 export default function MovieDetailsModal(props) {
     const allGenres = [
@@ -26,81 +26,83 @@ export default function MovieDetailsModal(props) {
 
     const isEditing = props.movie ? true : false;
 
-    const [title, setTitle] = useState(isEditing ? props.movie.title : '');
-    const [releaseDate, setReleaseDate] = useState(
-        isEditing ? props.movie.release_date : ''
-    );
-    const [posterUrl, setPosterUrl] = useState(
-        isEditing ? props.movie.poster_path : ''
-    );
-    const [genres, setGenres] = useState(isEditing ? props.movie.genres : []);
-    const [overview, setOverview] = useState(
-        isEditing ? props.movie.overview : ''
-    );
-    const [runtime, setRuntime] = useState(
-        isEditing && props.movie.runtime !== null ? props.movie.runtime : 0
-    );
-
-    const resetFieldsOnSubmit = () => {
-        setTitle(isEditing ? title : '');
-        setReleaseDate(isEditing ? releaseDate : '');
-        setPosterUrl(isEditing ? posterUrl : '');
-        setGenres(isEditing ? genres : []);
-        setOverview(isEditing ? overview : '');
-        setRuntime(isEditing ? runtime : '');
+    const validate = (values) => {
+        const errors = {};
+        if (!values.title) {
+            errors.title = 'Please enter a title';
+        }
+        if (!values.releaseDate) {
+            errors.releaseDate = 'Please select a release date';
+        }
+        if (!values.posterUrl) {
+            errors.posterUrl = 'Please enter a poster url';
+        } else if (!/^(https?):\/\/[^\s$.?#].[^\s]*$/i.test(values.posterUrl)) {
+            errors.posterUrl =
+                'Not a valid http link, please enter a valid http link';
+        }
+        if (!values.overview) {
+            errors.overview = 'Please enter an overview';
+        }
+        if (values.genres.length === 0) {
+            errors.genres = 'Please select at least one genre';
+        }
+        if (!values.runtime) {
+            errors.runtime = 'Please enter a runtime';
+        } else if (!/\d+$/i.test(values.runtime)) {
+            errors.runtime = 'Please enter a number';
+        }
+        return errors;
     };
 
-    const resetFieldsOnCancel = () => {
-        setTitle(isEditing ? props.movie.title : '');
-        setReleaseDate(isEditing ? props.movie.release_date : '');
-        setPosterUrl(isEditing ? props.movie.poster_path : '');
-        setGenres(isEditing ? props.movie.genres : []);
-        setOverview(isEditing ? props.movie.overview : '');
-        setRuntime(isEditing ? props.movie.runtime : '');
-    };
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            title: isEditing ? props.movie.title : '',
+            releaseDate: isEditing ? props.movie.release_date : '',
+            posterUrl: isEditing ? props.movie.poster_path : '',
+            genres: isEditing ? props.movie.genres : [],
+            overview: isEditing ? props.movie.overview : '',
+            runtime: isEditing ? props.movie.runtime : '',
+        },
+        validate,
+        onSubmit: (values) => {
+            if (isEditing) {
+                const updatedMovie = {
+                    id: props.movie.id,
+                    release_date: values.releaseDate,
+                    poster_path: values.posterUrl,
+                    title: values.title,
+                    overview: values.overview,
+                    genres: values.genres,
+                    runtime: Number(values.runtime), // bad request if string
+                    vote_average: props.movie.vote_average,
+                    tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from the backend and sending back as is empty, so putting some not empty value here
+                };
+                store.dispatch(thunkedUpdateMovie(updatedMovie));
+            } else {
+                const newMovie = {
+                    release_date: values.releaseDate,
+                    poster_path: values.posterUrl,
+                    title: values.title,
+                    overview: values.overview,
+                    genres: values.genres,
+                    runtime: Number(values.runtime), // bad request if string
+                };
+                store.dispatch(thunkedAddMovie(newMovie));
+            }
+            handleClose();
+        },
+    });
 
     const handleClose = () => {
         props.handleCloseModal();
-        resetFieldsOnCancel();
+        formik.resetForm();
     };
 
-    const handleUpdate = () => {
-        const movie = {
-            id: props.movie.id,
-            release_date: releaseDate,
-            poster_path: posterUrl,
-            title,
-            overview,
-            genres,
-            runtime,
-            vote_average: props.movie.vote_average,
-            tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from the backend and sending back as is empty, so putting some not empty value here
-        };
-        store.dispatch(thunkedUpdateMovie(movie));
-    };
-
-    const handleAdd = () => {
-        const movieToAdd = {
-            release_date: releaseDate || '2021-03-21',
-            poster_path: posterUrl || noPicture,
-            title: title || 'Some new title',
-            overview: overview || 'Some new overview',
-            genres: genres.length === 0 ? ['Drama'] : genres,
-            runtime: runtime || 99,
-            vote_average: 0.0,
-            tagline: 'New movie',
-        };
-        store.dispatch(thunkedAddMovie(movieToAdd));
-    };
-
-    const handleSubmit = () => {
-        if (isEditing) {
-            handleUpdate();
-        } else {
-            handleAdd();
-        }
-        props.handleCloseModal();
-        resetFieldsOnSubmit();
+    const addRedBorderIfError = (field) => {
+        return formik.touched[field] && formik.errors[field]
+            ? 'red-border'
+            : '';
     };
 
     return (
@@ -111,79 +113,147 @@ export default function MovieDetailsModal(props) {
             backdrop='static'
             size='lg'
         >
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    {isEditing ? 'EDIT MOVIE' : 'ADD MOVIE'}
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Title</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Title here'
-                        className='dialog-field-input'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </div>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Release date</span>
-                    <Form.Control
-                        type='date'
-                        value={releaseDate}
-                        onChange={(e) => setReleaseDate(e.target.value)}
-                    />
-                </div>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Movie Poster URL</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Movie Poster URL here'
-                        className='dialog-field-input'
-                        value={posterUrl}
-                        onChange={(e) => setPosterUrl(e.target.value)}
-                    />
-                </div>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Genres</span>
-                    <MultiSelect
-                        value={genres}
-                        options={allGenres}
-                        maxSelectedLabels={11}
-                        onChange={(e) => setGenres(e.value)}
-                        placeholder='Select Genres'
-                    />
-                </div>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Overview</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Overview here'
-                        className='dialog-field-input'
-                        value={overview}
-                        onChange={(e) => setOverview(e.target.value)}
-                    />
-                </div>
-                <div className='dialog-field-container'>
-                    <span className='dialog-field-label'>Runtime</span>
-                    <input
-                        type='text'
-                        placeholder='Enter Runtime here'
-                        className='dialog-field-input'
-                        value={runtime}
-                        onChange={(e) => setRuntime(e.target.value)}
-                    />
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant='secondary' onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant='primary' onClick={handleSubmit}>
-                    Submit
-                </Button>
-            </Modal.Footer>
+            <form onSubmit={formik.handleSubmit}>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        {isEditing ? 'EDIT MOVIE' : 'ADD MOVIE'}
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>Title</span>
+                        <input
+                            type='text'
+                            placeholder='Enter Title here'
+                            className={
+                                'dialog-field-input ' +
+                                addRedBorderIfError('title')
+                            }
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.title}
+                            id='title'
+                            name='title'
+                        />
+                        {formik.touched.title && formik.errors.title ? (
+                            <span className='error'>{formik.errors.title}</span>
+                        ) : null}
+                    </div>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>Release date</span>
+                        <Form.Control
+                            type='date'
+                            className={addRedBorderIfError('releaseDate')}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.releaseDate}
+                            id='releaseDate'
+                            name='releaseDate'
+                        />
+                        {formik.touched.releaseDate &&
+                        formik.errors.releaseDate ? (
+                            <span className='error'>
+                                {formik.errors.releaseDate}
+                            </span>
+                        ) : null}
+                    </div>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>
+                            Movie Poster URL
+                        </span>
+                        <input
+                            type='text'
+                            placeholder='Enter Movie Poster URL here'
+                            className={
+                                'dialog-field-input ' +
+                                addRedBorderIfError('posterUrl')
+                            }
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.posterUrl}
+                            id='posterUrl'
+                            name='posterUrl'
+                        />
+                        {formik.touched.posterUrl && formik.errors.posterUrl ? (
+                            <span className='error'>
+                                {formik.errors.posterUrl}
+                            </span>
+                        ) : null}
+                    </div>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>Genres</span>
+                        <MultiSelect
+                            className={addRedBorderIfError('genres')}
+                            options={allGenres}
+                            maxSelectedLabels={11}
+                            placeholder='Select Genres'
+                            value={formik.values.genres}
+                            onChange={formik.handleChange}
+                            id='genres'
+                            name='genres'
+                        />
+                        {formik.touched.genres && formik.errors.genres ? (
+                            <span className='error'>
+                                {formik.errors.genres}
+                            </span>
+                        ) : null}
+                    </div>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>Overview</span>
+                        <input
+                            type='text'
+                            placeholder='Enter Overview here'
+                            className={
+                                'dialog-field-input ' +
+                                addRedBorderIfError('overview')
+                            }
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.overview}
+                            id='overview'
+                            name='overview'
+                        />
+                        {formik.touched.overview && formik.errors.overview ? (
+                            <span className='error'>
+                                {formik.errors.overview}
+                            </span>
+                        ) : null}
+                    </div>
+                    <div className='dialog-field-container'>
+                        <span className='dialog-field-label'>Runtime</span>
+                        <input
+                            type='text'
+                            placeholder='Enter Runtime here'
+                            className={
+                                'dialog-field-input ' +
+                                addRedBorderIfError('runtime')
+                            }
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.runtime}
+                            id='runtime'
+                            name='runtime'
+                        />
+                        {formik.touched.runtime && formik.errors.runtime ? (
+                            <span className='error'>
+                                {formik.errors.runtime}
+                            </span>
+                        ) : null}
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant='secondary'
+                        onClick={formik.handleReset}
+                        type='button'
+                    >
+                        Reset
+                    </Button>
+                    <Button variant='primary' type='submit'>
+                        Submit
+                    </Button>
+                </Modal.Footer>
+            </form>
         </Modal>
     );
 }
@@ -199,7 +269,7 @@ MovieDetailsModal.propTypes = {
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
         overview: PropTypes.string.isRequired,
         runtime: PropTypes.number,
-        vote_average: PropTypes.number.isRequired,
-        tagline: PropTypes.string.isRequired,
+        vote_average: PropTypes.number,
+        tagline: PropTypes.string,
     }),
 };
