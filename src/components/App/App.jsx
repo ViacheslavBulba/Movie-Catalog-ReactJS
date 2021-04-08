@@ -9,8 +9,9 @@ import MovieList from '../MovieList/MovieList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
 import { useDispatch } from 'react-redux';
-
 import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 export default function App() {
     const [movieToOverview, setMovieToOverview] = useState(null);
@@ -41,27 +42,34 @@ export default function App() {
     useFetching();
 
     return (
-        <>
-            <ErrorBoundary>
-                {movieToOverview ? (
-                    <MovieOverview
-                        movie={movieToOverview}
-                        closeOverview={closeOverview}
-                    />
-                ) : (
-                    <Header />
-                )}
-                <div className='divider' />
-                <main className='main-container'>
-                    <div className='filtering-and-sorting-container'>
-                        <Filtering />
-                        <Sorting />
-                    </div>
-                    <ResultsCount />
-                    <MovieList showOverview={changeMovieToOverview} />
-                </main>
-                <Footer />
-            </ErrorBoundary>
-        </>
+        <Router>
+            <Switch>
+                <Route path='/' exact='true'>
+                    <ErrorBoundary>
+                        {movieToOverview ? (
+                            <MovieOverview
+                                movie={movieToOverview}
+                                closeOverview={closeOverview}
+                            />
+                        ) : (
+                            <Header />
+                        )}
+                        <div className='divider' />
+                        <main className='main-container'>
+                            <div className='filtering-and-sorting-container'>
+                                <Filtering />
+                                <Sorting />
+                            </div>
+                            <ResultsCount />
+                            <MovieList showOverview={changeMovieToOverview} />
+                        </main>
+                        <Footer />
+                    </ErrorBoundary>
+                </Route>
+                <Route path='*'>
+                    <PageNotFound />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
