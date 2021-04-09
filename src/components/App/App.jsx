@@ -8,8 +8,8 @@ import ResultsCount from '../ResultsCount/ResultsCount';
 import MovieList from '../MovieList/MovieList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
-import { useDispatch } from 'react-redux';
-import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';
+// import { useDispatch } from 'react-redux';   // commented to land a user on 'No movies found' state by default
+// import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';   // commented to land a user on 'No movies found' state by default
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
@@ -25,21 +25,21 @@ export default function App() {
         movieToOverview,
     ]);
 
-    function fetchMovies() {
-        return (dispatch) => {
-            dispatch(fetchMoviesPending());
-            dispatch(thunkedSetMovies());
-        };
-    }
+    // function fetchMovies() {   // commented to land a user on 'No movies found' state by default
+    //     return (dispatch) => {
+    //         dispatch(fetchMoviesPending());
+    //         dispatch(thunkedSetMovies());
+    //     };
+    // }
 
-    const useFetching = () => {
-        const dispatch = useDispatch();
-        useEffect(() => {
-            dispatch(fetchMovies());
-        }, []);
-    };
+    // const useFetching = () => {   // commented to land a user on 'No movies found' state by default
+    //     const dispatch = useDispatch();
+    //     useEffect(() => {
+    //         dispatch(fetchMovies());
+    //     }, []);
+    // };
 
-    useFetching();
+    //useFetching();   // commented to land a user on 'No movies found' state by default
 
     return (
         <Router>
