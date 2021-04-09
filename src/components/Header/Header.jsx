@@ -22,6 +22,12 @@ export default function Header() {
         store.dispatch(thunkedSetMovies());
     };
 
+    const doSearchIfEnterKeyPressed = (e) => {
+        if (e.which === 13) {
+            handleSearch();
+        }
+    };
+
     return (
         <header className='header-container'>
             <div className='logo-and-add-button-container'>
@@ -42,11 +48,9 @@ export default function Header() {
                     className='search-input'
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
+                    onKeyPress={doSearchIfEnterKeyPressed}
                 />
-                <button
-                    className='search-button'
-                    onClick={() => handleSearch()}
-                >
+                <button className='search-button' onClick={handleSearch}>
                     SEARCH
                 </button>
             </div>

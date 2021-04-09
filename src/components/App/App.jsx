@@ -44,7 +44,7 @@ export default function App() {
     return (
         <Router>
             <Switch>
-                <Route path='/' exact='true'>
+                <Route path='/' exact>
                     <ErrorBoundary>
                         {movieToOverview ? (
                             <MovieOverview

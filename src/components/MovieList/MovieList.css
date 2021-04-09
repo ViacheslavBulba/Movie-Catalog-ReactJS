@@ -7,3 +7,10 @@
     margin-right: 30px;
     min-height: 400px;
 }
+
+.no-movies-text {
+    font-family: 'Source Sans Pro';
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+}

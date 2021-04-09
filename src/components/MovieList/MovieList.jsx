@@ -9,13 +9,17 @@ export default function MovieList(props) {
 
     return (
         <div className='movie-list-container'>
-            {movies.map((item) => (
-                <MovieCard
-                    movie={item}
-                    key={item.id}
-                    showOverview={props.showOverview}
-                />
-            ))}
+            {movies.length === 0 ? (
+                <span className='no-movies-text'>No Movies Found</span>
+            ) : (
+                movies.map((item) => (
+                    <MovieCard
+                        movie={item}
+                        key={item.id}
+                        showOverview={props.showOverview}
+                    />
+                ))
+            )}
         </div>
     );
 }
