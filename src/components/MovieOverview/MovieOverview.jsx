@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import logo from '../../../public/netflix-logo.svg';
 import noPicture from '../../../public/no-picture-available.jpg';
+import { Link } from 'react-router-dom';
 
 export default function MovieOverview(props) {
     const addDefaultSrc = (e) => {
@@ -15,10 +16,12 @@ export default function MovieOverview(props) {
             <div className='overview-container'>
                 <div className='logo-and-back-button-container'>
                     <img src={logo} alt='logo' className='logo' />
-                    <i
-                        className='fa fa-times search-icon'
-                        onClick={props.closeOverview}
-                    ></i>
+                    <Link to='/'>
+                        <i
+                            className='fa fa-times search-icon'
+                            onClick={props.closeOverview}
+                        ></i>
+                    </Link>
                 </div>
                 <div className='movie-details-container'>
                     <img
