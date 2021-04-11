@@ -8,13 +8,31 @@ import ResultsCount from '../ResultsCount/ResultsCount';
 import MovieList from '../MovieList/MovieList';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MovieOverview from '../MovieOverview/MovieOverview';
-// import { useDispatch } from 'react-redux';   // commented to land a user on 'No movies found' state by default
-// import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';   // commented to land a user on 'No movies found' state by default
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import config from 'config';
+import axios from 'axios';
 
 export default function App() {
     const [movieToOverview, setMovieToOverview] = useState(null);
+
+    let location = useLocation();
+
+    const checkPathForId = () => {
+        const regEx = /^\/film\/(\d+)$/i;
+        if (regEx.test(location.pathname)) {
+            const found = location.pathname.match(regEx);
+            const movieId = found[1];
+            axios
+                .get(`${config.apiUrl}/movies/${movieId}`)
+                .then((response) => {
+                    changeMovieToOverview(response.data);
+                })
+                .catch((error) => {
+                    // handle error
+                });
+        }
+    };
 
     const changeMovieToOverview = useCallback(
         (movie) => setMovieToOverview(movie),
@@ -25,51 +43,37 @@ export default function App() {
         movieToOverview,
     ]);
 
-    // function fetchMovies() {   // commented to land a user on 'No movies found' state by default
-    //     return (dispatch) => {
-    //         dispatch(fetchMoviesPending());
-    //         dispatch(thunkedSetMovies());
-    //     };
-    // }
-
-    // const useFetching = () => {   // commented to land a user on 'No movies found' state by default
-    //     const dispatch = useDispatch();
-    //     useEffect(() => {
-    //         dispatch(fetchMovies());
-    //     }, []);
-    // };
-
-    //useFetching();   // commented to land a user on 'No movies found' state by default
+    useEffect(() => {
+        checkPathForId();
+    }, []);
 
     return (
-        <Router>
-            <Switch>
-                <Route path='/' exact>
-                    <ErrorBoundary>
-                        {movieToOverview ? (
-                            <MovieOverview
-                                movie={movieToOverview}
-                                closeOverview={closeOverview}
-                            />
-                        ) : (
-                            <Header />
-                        )}
-                        <div className='divider' />
-                        <main className='main-container'>
-                            <div className='filtering-and-sorting-container'>
-                                <Filtering />
-                                <Sorting />
-                            </div>
-                            <ResultsCount />
-                            <MovieList showOverview={changeMovieToOverview} />
-                        </main>
-                        <Footer />
-                    </ErrorBoundary>
-                </Route>
-                <Route path='*'>
-                    <PageNotFound />
-                </Route>
-            </Switch>
-        </Router>
+        <Switch>
+            <Route path={['/', '/film/:id']} exact>
+                <ErrorBoundary>
+                    {movieToOverview ? (
+                        <MovieOverview
+                            movie={movieToOverview}
+                            closeOverview={closeOverview}
+                        />
+                    ) : (
+                        <Header />
+                    )}
+                    <div className='divider' />
+                    <main className='main-container'>
+                        <div className='filtering-and-sorting-container'>
+                            <Filtering />
+                            <Sorting />
+                        </div>
+                        <ResultsCount />
+                        <MovieList showOverview={changeMovieToOverview} />
+                    </main>
+                    <Footer />
+                </ErrorBoundary>
+            </Route>
+            <Route path='*'>
+                <PageNotFound />
+            </Route>
+        </Switch>
     );
 }
