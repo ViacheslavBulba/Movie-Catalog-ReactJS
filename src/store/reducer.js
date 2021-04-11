@@ -9,6 +9,7 @@ const initialState = {
     filerByGenres: [],
     search: '',
     searchBy: 'title',
+    movieNotFoundById: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -54,6 +55,11 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 searchBy: action.payload.searchBy
+            };
+        case actionType.SET_MOVIE_NOT_FOUND_BY_ID:
+            return {
+                ...state,
+                movieNotFoundById: action.payload.movieNotFoundById
             };
         default:
             return state;

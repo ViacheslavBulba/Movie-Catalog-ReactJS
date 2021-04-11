@@ -12,9 +12,14 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import config from 'config';
 import axios from 'axios';
+import { setMovieNotFoundById } from '../../store/actions';
+import store from '../../store/store';
+import { useSelector } from 'react-redux';
 
 export default function App() {
     const [movieToOverview, setMovieToOverview] = useState(null);
+
+    const movieNotFound = useSelector((state) => state.movieNotFoundById);
 
     let location = useLocation();
 
@@ -29,7 +34,7 @@ export default function App() {
                     changeMovieToOverview(response.data);
                 })
                 .catch((error) => {
-                    // handle error
+                    store.dispatch(setMovieNotFoundById(true));
                 });
         }
     };
@@ -51,24 +56,30 @@ export default function App() {
         <Switch>
             <Route path={['/', '/film/:id']} exact>
                 <ErrorBoundary>
-                    {movieToOverview ? (
+                    {movieNotFound && <PageNotFound />}
+                    {!movieNotFound && movieToOverview && (
                         <MovieOverview
                             movie={movieToOverview}
                             closeOverview={closeOverview}
                         />
-                    ) : (
-                        <Header />
                     )}
-                    <div className='divider' />
-                    <main className='main-container'>
-                        <div className='filtering-and-sorting-container'>
-                            <Filtering />
-                            <Sorting />
-                        </div>
-                        <ResultsCount />
-                        <MovieList showOverview={changeMovieToOverview} />
-                    </main>
-                    <Footer />
+                    {!movieNotFound && !movieToOverview && <Header />}
+                    {!movieNotFound && (
+                        <>
+                            <div className='divider' />
+                            <main className='main-container'>
+                                <div className='filtering-and-sorting-container'>
+                                    <Filtering />
+                                    <Sorting />
+                                </div>
+                                <ResultsCount />
+                                <MovieList
+                                    showOverview={changeMovieToOverview}
+                                />
+                            </main>
+                            <Footer />
+                        </>
+                    )}
                 </ErrorBoundary>
             </Route>
             <Route path='*'>

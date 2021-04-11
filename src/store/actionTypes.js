@@ -7,6 +7,7 @@ const actionType = {
     SET_SORT_ORDER: 'SET_SORT_ORDER',
     SET_SEARCH: 'SET_SEARCH',
     SET_SEARCH_BY: 'SET_SEARCH_BY',
+    SET_MOVIE_NOT_FOUND_BY_ID: 'SET_MOVIE_NOT_FOUND_BY_ID',
 };
 
 export default actionType;

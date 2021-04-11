@@ -94,3 +94,10 @@ export const setSearchBy = searchBy => ({
         searchBy
     }
 });
+
+export const setMovieNotFoundById = movieNotFoundById => ({
+    type: actionType.SET_MOVIE_NOT_FOUND_BY_ID,
+    payload: {
+        movieNotFoundById
+    }
+});

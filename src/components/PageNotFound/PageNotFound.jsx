@@ -4,8 +4,14 @@ import logo from '../../../public/netflix-logo.svg';
 import notFoundSvg from '../../../public/404-error.svg';
 import Footer from '../Footer/Footer';
 import { Link } from 'react-router-dom';
+import { setMovieNotFoundById } from '../../store/actions';
+import store from '../../store/store';
 
 export default function PageNotFound() {
+    const handleClick = () => {
+        store.dispatch(setMovieNotFoundById(false));
+    };
+
     return (
         <>
             <div className='page-not-found-container'>
@@ -19,7 +25,9 @@ export default function PageNotFound() {
                     className='not-found-image'
                 />
                 <Link to='/'>
-                    <button className='go-back-button'>GO BACK TO HOME</button>
+                    <button className='go-back-button' onClick={handleClick}>
+                        GO BACK TO HOME
+                    </button>
                 </Link>
             </div>
             <Footer />
