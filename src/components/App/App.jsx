@@ -53,38 +53,40 @@ export default function App() {
     }, []);
 
     return (
-        <Switch>
-            <Route path={['/', '/film/:id']} exact>
-                <ErrorBoundary>
-                    {movieNotFound && <PageNotFound />}
-                    {!movieNotFound && movieToOverview && (
-                        <MovieOverview
-                            movie={movieToOverview}
-                            closeOverview={closeOverview}
-                        />
-                    )}
-                    {!movieNotFound && !movieToOverview && <Header />}
-                    {!movieNotFound && (
-                        <>
-                            <div className='divider' />
-                            <main className='main-container'>
-                                <div className='filtering-and-sorting-container'>
-                                    <Filtering />
-                                    <Sorting />
-                                </div>
-                                <ResultsCount />
-                                <MovieList
-                                    showOverview={changeMovieToOverview}
-                                />
-                            </main>
-                            <Footer />
-                        </>
-                    )}
-                </ErrorBoundary>
-            </Route>
-            <Route path='*'>
-                <PageNotFound />
-            </Route>
-        </Switch>
+        <>
+            <Switch>
+                <Route path={['/', '/film/:id']} exact>
+                    <ErrorBoundary>
+                        {movieNotFound && <PageNotFound />}
+                        {!movieNotFound && movieToOverview && (
+                            <MovieOverview
+                                movie={movieToOverview}
+                                closeOverview={closeOverview}
+                            />
+                        )}
+                        {!movieNotFound && !movieToOverview && <Header />}
+                        {!movieNotFound && (
+                            <>
+                                <div className='divider' />
+                                <main className='main-container'>
+                                    <div className='filtering-and-sorting-container'>
+                                        <Filtering />
+                                        <Sorting />
+                                    </div>
+                                    <ResultsCount />
+                                    <MovieList
+                                        showOverview={changeMovieToOverview}
+                                    />
+                                </main>
+                            </>
+                        )}
+                    </ErrorBoundary>
+                </Route>
+                <Route path='*'>
+                    <PageNotFound />
+                </Route>
+            </Switch>
+            <Footer />
+        </>
     );
 }

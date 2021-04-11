@@ -2,7 +2,6 @@ import React from 'react';
 import './PageNotFound.css';
 import logo from '../../../public/netflix-logo.svg';
 import notFoundSvg from '../../../public/404-error.svg';
-import Footer from '../Footer/Footer';
 import { Link } from 'react-router-dom';
 import { setMovieNotFoundById } from '../../store/actions';
 import store from '../../store/store';
@@ -30,7 +29,6 @@ export default function PageNotFound() {
                     </button>
                 </Link>
             </div>
-            <Footer />
         </>
     );
 }
