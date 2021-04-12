@@ -1,26 +1,44 @@
-import React, { useEffect } from 'react';
 import './App.css';
-import Footer from '../Footer/Footer';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import OverviewView from '../OverviewView/OverviewView';
-import SearchView from '../SearchView/SearchView';
-import { Switch, Route, useLocation } from 'react-router-dom';
-import PageNotFound from '../PageNotFound/PageNotFound';
-import config from 'config';
+
 import axios from 'axios';
-import { setMovieNotFoundById, setMovieToOverview } from '../../store/actions';
-import store from '../../store/store';
+import config from 'config';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Route, Switch, useLocation } from 'react-router-dom';
+
+import {
+    setMovieNotFoundById,
+    setMovieToOverview,
+    setSearch,
+    setSearchBy,
+    thunkedSetMovies,
+} from '../../store/actions';
+import store from '../../store/store';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import Footer from '../Footer/Footer';
+import OverviewView from '../OverviewView/OverviewView';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import SearchView from '../SearchView/SearchView';
 
 export default function App() {
     const movieNotFound = useSelector((state) => state.movieNotFoundById);
 
     let location = useLocation();
 
-    const checkPathForId = () => {
-        const regEx = /^\/film\/(\d+)$/i;
-        if (regEx.test(location.pathname)) {
-            const found = location.pathname.match(regEx);
+    const checkPathOnLanding = () => {
+        const searchRegExp = /^\/search\/(.*?)$/i;
+        if (searchRegExp.test(location.pathname)) {
+            const found = location.pathname.match(searchRegExp);
+            const searchValue = found[1].replaceAll('%20', ' ');
+            console.log(searchValue);
+            store.dispatch(setSearch(searchValue));
+            store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
+            store.dispatch(thunkedSetMovies());
+            return;
+        }
+        const overviewRegExp = /^\/film\/(\d+)$/i;
+        if (overviewRegExp.test(location.pathname)) {
+            const found = location.pathname.match(overviewRegExp);
             const movieId = found[1];
             axios
                 .get(`${config.apiUrl}/movies/${movieId}`)
@@ -30,17 +48,18 @@ export default function App() {
                 .catch((error) => {
                     store.dispatch(setMovieNotFoundById(true));
                 });
+            return;
         }
     };
 
     useEffect(() => {
-        checkPathForId();
+        checkPathOnLanding();
     }, []);
 
     return (
         <ErrorBoundary>
             <Switch>
-                <Route path={['/', '/search/']} exact>
+                <Route path={['/', '/search/:title']} exact>
                     <SearchView />
                 </Route>
                 <Route path={'/film/:id'} exact>
