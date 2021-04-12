@@ -8,6 +8,7 @@ const actionType = {
     SET_SEARCH: 'SET_SEARCH',
     SET_SEARCH_BY: 'SET_SEARCH_BY',
     SET_MOVIE_NOT_FOUND_BY_ID: 'SET_MOVIE_NOT_FOUND_BY_ID',
+    SET_MOVIE_TO_OVERVIEW: 'SET_MOVIE_TO_OVERVIEW'
 };
 
 export default actionType;

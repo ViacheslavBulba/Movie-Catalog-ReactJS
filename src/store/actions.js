@@ -101,3 +101,10 @@ export const setMovieNotFoundById = movieNotFoundById => ({
         movieNotFoundById
     }
 });
+
+export const setMovieToOverview = movieToOverview => ({
+    type: actionType.SET_MOVIE_TO_OVERVIEW,
+    payload: {
+        movieToOverview
+    }
+});

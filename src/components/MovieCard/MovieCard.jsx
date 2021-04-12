@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 import noPicture from '../../../public/no-picture-available.jpg';
 
-import { thunkedDeleteMovie } from '../../store/actions';
+import { thunkedDeleteMovie, setMovieToOverview } from '../../store/actions';
 import store from '../../store/store';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,10 @@ export default function MovieCard(props) {
 
     const addDefaultSrc = (e) => {
         e.target.src = noPicture;
+    };
+
+    const handleOverviewClick = () => {
+        store.dispatch(setMovieToOverview(props.movie));
     };
 
     return (
@@ -42,7 +46,7 @@ export default function MovieCard(props) {
                                 : props.movie.poster_path
                         }
                         onError={addDefaultSrc}
-                        onClick={() => props.showOverview(props.movie)}
+                        onClick={handleOverviewClick}
                     ></img>
                 </Link>
                 <div className='name-and-year-container'>
@@ -73,5 +77,4 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
-    showOverview: PropTypes.func.isRequired,
 };

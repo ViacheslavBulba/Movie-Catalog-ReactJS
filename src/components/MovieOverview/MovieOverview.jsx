@@ -1,15 +1,17 @@
 import React from 'react';
 import './MovieOverview.css';
 import Moment from 'react-moment';
-import PropTypes from 'prop-types';
 import logo from '../../../public/netflix-logo.svg';
 import noPicture from '../../../public/no-picture-available.jpg';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export default function MovieOverview(props) {
+export default function MovieOverview() {
     const addDefaultSrc = (e) => {
         e.target.src = noPicture;
     };
+
+    const movie = useSelector((state) => state.movieToOverview);
 
     return (
         <>
@@ -17,60 +19,40 @@ export default function MovieOverview(props) {
                 <div className='logo-and-back-button-container'>
                     <img src={logo} alt='logo' className='logo' />
                     <Link to='/'>
-                        <i
-                            className='fa fa-times search-icon'
-                            onClick={props.closeOverview}
-                        ></i>
+                        <i className='fa fa-times search-icon'></i>
                     </Link>
                 </div>
                 <div className='movie-details-container'>
                     <img
                         className='movie-image-overview'
-                        src={props.movie.poster_path || noPicture}
+                        src={movie.poster_path || noPicture}
                         onError={addDefaultSrc}
                     ></img>
                     <div className='overview-text-container'>
                         <div className='name-and-rating-container'>
                             <span className='overview-title'>
-                                {props.movie.title}
+                                {movie.title}
                             </span>
                             <span className='overview-rating'>
-                                {props.movie.vote_average}
+                                {movie.vote_average}
                             </span>
                         </div>
                         <span className='overview-tagline'>
-                            {props.movie.tagline}
+                            {movie.tagline}
                         </span>
                         <div className='year-and-duration-container'>
                             <Moment
-                                date={props.movie.release_date}
+                                date={movie.release_date}
                                 parse='YYYY-MM-dd'
                                 format='YYYY'
                                 className='overview-year'
                             />
-                            <span>{props.movie.runtime} min</span>
+                            <span>{movie.runtime} min</span>
                         </div>
-                        <span className='overview-text'>
-                            {props.movie.overview}
-                        </span>
+                        <span className='overview-text'>{movie.overview}</span>
                     </div>
                 </div>
             </div>
         </>
     );
 }
-
-MovieOverview.propTypes = {
-    movie: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        poster_path: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        release_date: PropTypes.string.isRequired,
-        genres: PropTypes.arrayOf(PropTypes.string.isRequired),
-        vote_average: PropTypes.number.isRequired,
-        tagline: PropTypes.string.isRequired,
-        runtime: PropTypes.number.isRequired,
-        overview: PropTypes.string.isRequired,
-    }).isRequired,
-    closeOverview: PropTypes.func.isRequired,
-};

@@ -4,8 +4,11 @@ import logo from '../../../public/netflix-logo.svg';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 import { setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
+import { useHistory } from 'react-router-dom';
 
 export default function Header() {
+    const history = useHistory();
+
     const [showModal, setShowModal] = useState(false);
 
     const [searchValue, setSearchValue] = useState('');
@@ -20,6 +23,7 @@ export default function Header() {
         store.dispatch(setSearch(searchValue));
         store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
         store.dispatch(thunkedSetMovies());
+        history.push('/search/');
     };
 
     const doSearchIfEnterKeyPressed = (e) => {
