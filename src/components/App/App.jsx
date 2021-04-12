@@ -6,13 +6,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch, useLocation } from 'react-router-dom';
 
-import {
-    setMovieNotFoundById,
-    setMovieToOverview,
-    setSearch,
-    setSearchBy,
-    thunkedSetMovies,
-} from '../../store/actions';
+import { setMovieNotFoundById, setMovieToOverview } from '../../store/actions';
 import store from '../../store/store';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Footer from '../Footer/Footer';
@@ -26,16 +20,6 @@ export default function App() {
     let location = useLocation();
 
     const checkPathOnLanding = () => {
-        const searchRegExp = /^\/search\/(.*?)$/i;
-        if (searchRegExp.test(location.pathname)) {
-            const found = location.pathname.match(searchRegExp);
-            const searchValue = found[1].replaceAll('%20', ' ');
-            console.log(searchValue);
-            store.dispatch(setSearch(searchValue));
-            store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
-            store.dispatch(thunkedSetMovies());
-            return;
-        }
         const overviewRegExp = /^\/film\/(\d+)$/i;
         if (overviewRegExp.test(location.pathname)) {
             const found = location.pathname.match(overviewRegExp);
@@ -45,7 +29,7 @@ export default function App() {
                 .then((response) => {
                     store.dispatch(setMovieToOverview(response.data));
                 })
-                .catch((error) => {
+                .catch(() => {
                     store.dispatch(setMovieNotFoundById(true));
                 });
             return;
