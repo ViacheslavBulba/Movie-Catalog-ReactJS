@@ -8,15 +8,20 @@ import Header from '../Header/Header';
 import MovieList from '../MovieList/MovieList';
 import ResultsCount from '../ResultsCount/ResultsCount';
 import Sorting from '../Sorting/Sorting';
+import { useLocation } from 'react-router-dom';
 
 export default function SearchView() {
+    let location = useLocation();
+
     let { title } = useParams();
 
     const checkPathOnLanding = () => {
-        const searchValue = title;
-        store.dispatch(setSearch(searchValue));
-        store.dispatch(setSearchBy('title'));
-        store.dispatch(thunkedSetMovies());
+        if (location.pathname !== '/') {
+            const searchValue = title;
+            store.dispatch(setSearch(searchValue));
+            store.dispatch(setSearchBy('title'));
+            store.dispatch(thunkedSetMovies());
+        }
     };
 
     useEffect(() => {
