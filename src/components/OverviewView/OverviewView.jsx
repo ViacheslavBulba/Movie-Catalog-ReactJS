@@ -1,10 +1,9 @@
 import axios from 'axios';
 import config from 'config';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { setMovieNotFoundById, setMovieToOverview } from '../../store/actions';
+import { setMovieToOverview } from '../../store/actions';
 import store from '../../store/store';
 import Filtering from '../Filtering/Filtering';
 import MovieList from '../MovieList/MovieList';
@@ -16,22 +15,21 @@ import Sorting from '../Sorting/Sorting';
 export default function OverviewView() {
     let { id } = useParams();
 
-    const movieNotFound = useSelector((state) => state.movieNotFoundById);
+    const [movieNotFound, setMovieNotFound] = useState(false);
 
-    const checkPathOnLanding = () => {
+    const getMovieOnLanding = () => {
         axios
             .get(`${config.apiUrl}/movies/${id}`)
             .then((response) => {
+                setMovieNotFound(false);
                 store.dispatch(setMovieToOverview(response.data));
             })
             .catch(() => {
-                store.dispatch(setMovieNotFoundById(true));
+                setMovieNotFound(true);
             });
     };
 
-    useEffect(() => {
-        checkPathOnLanding();
-    }, []);
+    getMovieOnLanding();
 
     return (
         <>
