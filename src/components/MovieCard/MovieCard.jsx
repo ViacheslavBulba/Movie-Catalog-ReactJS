@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
 import './MovieCard.css';
-import Moment from 'react-moment';
-import PropTypes from 'prop-types';
-import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
-import noPicture from '../../../public/no-picture-available.jpg';
 
-import { thunkedDeleteMovie, setMovieToOverview } from '../../store/actions';
-import store from '../../store/store';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+
+import noPicture from '../../../public/no-picture-available.jpg';
+import { thunkedDeleteMovie } from '../../store/actions';
+import store from '../../store/store';
+import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
@@ -21,10 +22,6 @@ export default function MovieCard(props) {
 
     const addDefaultSrc = (e) => {
         e.target.src = noPicture;
-    };
-
-    const handleOverviewClick = () => {
-        store.dispatch(setMovieToOverview(props.movie));
     };
 
     return (
@@ -46,7 +43,6 @@ export default function MovieCard(props) {
                                 : props.movie.poster_path
                         }
                         onError={addDefaultSrc}
-                        onClick={handleOverviewClick}
                     ></img>
                 </Link>
                 <div className='name-and-year-container'>
