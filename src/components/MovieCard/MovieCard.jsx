@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
 import './MovieCard.css';
-import Moment from 'react-moment';
-import PropTypes from 'prop-types';
-import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
-import noPicture from '../../../public/no-picture-available.jpg';
 
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
+
+import noPicture from '../../../public/no-picture-available.jpg';
 import { thunkedDeleteMovie } from '../../store/actions';
 import store from '../../store/store';
+import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function MovieCard(props) {
     const [showModal, setShowModal] = useState(false);
@@ -32,16 +34,17 @@ export default function MovieCard(props) {
                         onClick={() => handleDelete(props.movie.id)}
                     />
                 </div>
-                <img
-                    className='movie-image'
-                    src={
-                        props.movie.poster_path === ''
-                            ? noPicture
-                            : props.movie.poster_path
-                    }
-                    onError={addDefaultSrc}
-                    onClick={() => props.showOverview(props.movie)}
-                ></img>
+                <Link to={`/film/${props.movie.id}`}>
+                    <img
+                        className='movie-image'
+                        src={
+                            props.movie.poster_path === ''
+                                ? noPicture
+                                : props.movie.poster_path
+                        }
+                        onError={addDefaultSrc}
+                    ></img>
+                </Link>
                 <div className='name-and-year-container'>
                     <div>{props.movie.title}</div>
                     <Moment
@@ -70,5 +73,4 @@ MovieCard.propTypes = {
         release_date: PropTypes.string.isRequired,
         genres: PropTypes.arrayOf(PropTypes.string.isRequired),
     }).isRequired,
-    showOverview: PropTypes.func.isRequired,
 };

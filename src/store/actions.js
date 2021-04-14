@@ -94,3 +94,17 @@ export const setSearchBy = searchBy => ({
         searchBy
     }
 });
+
+export const setMovieNotFoundById = movieNotFoundById => ({
+    type: actionType.SET_MOVIE_NOT_FOUND_BY_ID,
+    payload: {
+        movieNotFoundById
+    }
+});
+
+export const setMovieToOverview = movieToOverview => ({
+    type: actionType.SET_MOVIE_TO_OVERVIEW,
+    payload: {
+        movieToOverview
+    }
+});
