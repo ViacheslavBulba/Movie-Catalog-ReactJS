@@ -29,7 +29,9 @@ export default function OverviewView() {
             });
     };
 
-    getMovieOnLanding();
+    useEffect(() => {
+        getMovieOnLanding();
+    }, [id]);
 
     return (
         <>
