@@ -1,7 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test for movie overview 1`] = `
-<span>
-  Loading...
-</span>
+<div
+  className="overview-container"
+>
+  <div
+    className="logo-and-back-button-container"
+  >
+    <img
+      alt="logo"
+      className="logo"
+      src="netflix-logo.svg"
+    />
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-times search-icon"
+      />
+    </a>
+  </div>
+  <div
+    className="movie-details-container"
+  >
+    <img
+      className="movie-image-overview"
+      onError={[Function]}
+      src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+    />
+    <div
+      className="overview-text-container"
+    >
+      <div
+        className="name-and-rating-container"
+      >
+        <span
+          className="overview-title"
+        >
+          mock movie
+        </span>
+        <span
+          className="overview-rating"
+        >
+          9.9
+        </span>
+      </div>
+      <span
+        className="overview-tagline"
+      >
+        mock tagline
+      </span>
+      <div
+        className="year-and-duration-container"
+      >
+        <time
+          className="overview-year"
+          dateTime={"2021-04-01T07:00:00.000Z"}
+        >
+          2021
+        </time>
+        <span>
+          90
+           min
+        </span>
+      </div>
+      <span
+        className="overview-text"
+      >
+        mock overview
+      </span>
+    </div>
+  </div>
+</div>
 `;

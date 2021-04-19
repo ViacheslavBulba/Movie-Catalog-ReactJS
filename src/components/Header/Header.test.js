@@ -2,8 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Header from './Header';
 
-import { Provider } from 'react-redux'
-import configureStore from 'redux-mock-store'
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore();
 

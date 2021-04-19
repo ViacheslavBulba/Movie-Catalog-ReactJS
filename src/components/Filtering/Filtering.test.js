@@ -2,8 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Filtering from './Filtering';
 
-import { Provider } from 'react-redux'
-import configureStore from 'redux-mock-store'
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore();
 
@@ -20,7 +20,7 @@ const initialState = {
     movieToOverview: null,
 };
 
-const store = mockStore(initialState)
+const store = mockStore(initialState);
 
 test('snapshot test for filtering', () => {
     const component = renderer.create(

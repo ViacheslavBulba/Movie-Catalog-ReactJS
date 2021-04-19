@@ -4,7 +4,7 @@
 
 `npm test -- -u`
 
-./node_modules/.bin/jest --collect-coverage
+`./node_modules/.bin/jest --collect-coverage`
 
 # How to add a backend (local movies API service/server) as a dependency
 
