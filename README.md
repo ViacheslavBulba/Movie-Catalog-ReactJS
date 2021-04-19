@@ -1,3 +1,11 @@
+# Testing with Jest
+
+`./node_modules/.bin/jest --updateSnapshot`
+
+`npm test -- -u`
+
+./node_modules/.bin/jest --collect-coverage
+
 # How to add a backend (local movies API service/server) as a dependency
 
 `npm i --save-dev git+https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS.git`

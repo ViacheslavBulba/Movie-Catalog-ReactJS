@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for movie list 1`] = `
+<div
+  className="movie-list-container"
+>
+  <span
+    className="no-movies-text"
+  >
+    No Movies Found
+  </span>
+</div>
+`;
