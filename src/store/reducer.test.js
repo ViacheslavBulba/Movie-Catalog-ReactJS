@@ -2,7 +2,7 @@ import reducer from './reducer';
 import actionType from './actionTypes';
 
 describe('reducer', () => {
-    test('returns the initial state for unknown action', () => {
+    it('returns the initial state for unknown action', () => {
         expect(reducer(undefined, {})).toEqual({
             pending: false,
             movies: [],
