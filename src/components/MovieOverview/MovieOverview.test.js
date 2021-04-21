@@ -18,7 +18,6 @@ const initialState = {
     filerByGenres: [],
     search: '',
     searchBy: 'title',
-    movieNotFoundById: false,
     movieToOverview: {
         'id': 1,
         'title': 'mock movie',

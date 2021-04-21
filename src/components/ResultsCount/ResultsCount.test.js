@@ -31,7 +31,6 @@ const initialState = {
     filerByGenres: [],
     search: '',
     searchBy: 'title',
-    movieNotFoundById: false,
     movieToOverview: null,
 };
 
