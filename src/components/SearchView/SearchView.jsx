@@ -35,7 +35,7 @@ export default function SearchView() {
             <main className='main-container'>
                 <div className='filtering-and-sorting-container'>
                     <Filtering />
-                    <Sorting />
+                    {/* <Sorting /> */}
                 </div>
                 <ResultsCount />
                 <MovieList />

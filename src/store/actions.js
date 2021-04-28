@@ -1,25 +1,25 @@
 import actionType from './actionTypes';
-import config from 'config';
+// import config from 'config';
 import axios from 'axios';
 import store from './store';
 
 export const thunkedAddMovie = movie =>
     dispatch =>
-        axios.post(`${config.apiUrl}/movies/`, movie)
+        axios.post(`http://localhost:4000/movies/`, movie)
             .then(() => {
                 dispatch(thunkedSetMovies());
             });
 
 export const thunkedDeleteMovie = id =>
     dispatch =>
-        axios.delete(`${config.apiUrl}/movies/${id}`)
+        axios.delete(`http://localhost:4000/movies/${id}`)
             .then(() => {
                 dispatch(thunkedSetMovies());
             });
 
 export const thunkedUpdateMovie = movie =>
     dispatch =>
-        axios.put(`${config.apiUrl}/movies/`, movie)
+        axios.put(`http://localhost:4000/movies/`, movie)
             .then(() => {
                 dispatch(thunkedSetMovies());
             });
@@ -37,7 +37,7 @@ export const setMovies = movies => ({
 
 export const thunkedSetMovies = () =>
     dispatch =>
-        axios.get(`${config.apiUrl}/movies`, {
+        axios.get(`http://localhost:4000/movies`, {
             params: {
                 searchBy: store.getState().searchBy,
                 filter: store.getState().filerByGenres.join(),

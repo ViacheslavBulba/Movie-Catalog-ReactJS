@@ -9,7 +9,7 @@ import OverviewView from '../OverviewView/OverviewView';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import SearchView from '../SearchView/SearchView';
 
-export default function App() {
+export default function MyApp() {
     return (
         <ErrorBoundary>
             <Switch>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from 'config';
+// import config from 'config';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ export default function OverviewView() {
 
     const getMovieOnLanding = () => {
         axios
-            .get(`${config.apiUrl}/movies/${id}`)
+            .get(`http://localhost:4000/movies/${id}`)
             .then((response) => {
                 setMovieNotFound(false);
                 store.dispatch(setMovieToOverview(response.data));
