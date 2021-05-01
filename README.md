@@ -1,3 +1,12 @@
+# SSR
+
+npm install webpack-node-externals --save-dev
+
+npm install nodemon npm-run-all --save-dev
+
+npm install webpack-dev-middleware webpack-hot-middleware
+webpack-hot-server-middleware --save-dev
+
 # Testing with Jest
 
 `./node_modules/.bin/jest --updateSnapshot`
