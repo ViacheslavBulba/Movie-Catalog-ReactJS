@@ -1,7 +1,7 @@
 import actionType from './actionTypes';
 // import config from 'config';
 import axios from 'axios';
-import { useSelector } from 'react-redux'
+import { useStore } from 'react-redux'
 
 export const thunkedAddMovie = movie =>
     dispatch =>
@@ -36,15 +36,15 @@ export const setMovies = movies => ({
 });
 
 export const thunkedSetMovies = () => {
-    const state = useSelector((state) => state);
+    const store = useStore();
     dispatch =>
         axios.get(`http://localhost:4000/movies`, {
             params: {
-                searchBy: state.searchBy,
-                filter: state.filerByGenres.join(),
-                search: state.search,
-                sortBy: state.sortBy,
-                sortOrder: state.sortOrder,
+                searchBy: store.getState().searchBy,
+                filter: store.getState().filerByGenres.join(),
+                search: store.getState().search,
+                sortBy: store.getState().sortBy,
+                sortOrder: store.getState().sortOrder,
             },
         })
             .then(response => {
