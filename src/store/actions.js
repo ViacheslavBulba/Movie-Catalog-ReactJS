@@ -1,7 +1,6 @@
 import actionType from './actionTypes';
 // import config from 'config';
 import axios from 'axios';
-import { useStore } from 'react-redux'
 
 export const thunkedAddMovie = movie =>
     dispatch =>
@@ -35,8 +34,7 @@ export const setMovies = movies => ({
     }
 });
 
-export const thunkedSetMovies = () => {
-    const store = useStore();
+export const thunkedSetMovies = store =>
     dispatch =>
         axios.get(`http://localhost:4000/movies`, {
             params: {
@@ -53,7 +51,6 @@ export const thunkedSetMovies = () => {
             .catch(error => {
                 dispatch(fetchMoviesError(error));
             });
-}
 
 export const fetchMoviesError = error => ({
     type: actionType.FETCH_MOVIES_ERROR,
