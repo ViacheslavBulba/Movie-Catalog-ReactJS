@@ -10,10 +10,12 @@ import { thunkedDeleteMovie } from '../../store/actions';
 
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 
 export default function MovieCard(props) {
     const dispatch = useDispatch();
+
+    const store = useStore();
 
     const [showModal, setShowModal] = useState(false);
 
@@ -21,7 +23,7 @@ export default function MovieCard(props) {
     const showEditMovieModal = () => setShowModal(true);
 
     const handleDelete = (id) => {
-        dispatch(thunkedDeleteMovie(id));
+        dispatch(thunkedDeleteMovie(id, store));
     };
 
     const addDefaultSrc = (e) => {

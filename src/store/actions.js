@@ -2,25 +2,25 @@ import actionType from './actionTypes';
 // import config from 'config';
 import axios from 'axios';
 
-export const thunkedAddMovie = movie =>
+export const thunkedAddMovie = (movie, store) =>
     dispatch =>
         axios.post(`http://localhost:4000/movies/`, movie)
             .then(() => {
-                dispatch(thunkedSetMovies());
+                dispatch(thunkedSetMovies(store));
             });
 
-export const thunkedDeleteMovie = id =>
+export const thunkedDeleteMovie = (id, store) =>
     dispatch =>
         axios.delete(`http://localhost:4000/movies/${id}`)
             .then(() => {
-                dispatch(thunkedSetMovies());
+                dispatch(thunkedSetMovies(store));
             });
 
-export const thunkedUpdateMovie = movie =>
+export const thunkedUpdateMovie = (movie, store) =>
     dispatch =>
         axios.put(`http://localhost:4000/movies/`, movie)
             .then(() => {
-                dispatch(thunkedSetMovies());
+                dispatch(thunkedSetMovies(store));
             });
 
 export const fetchMoviesPending = () => ({
