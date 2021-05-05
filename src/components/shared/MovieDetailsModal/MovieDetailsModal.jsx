@@ -5,11 +5,13 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
 import { thunkedAddMovie, thunkedUpdateMovie } from '../../../store/actions';
-import store from '../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 import { MultiSelect } from 'primereact/multiselect';
 import { useFormik } from 'formik';
 
 export default function MovieDetailsModal(props) {
+    const dispatch = useDispatch();
+
     const allGenres = [
         'Fantasy',
         'Drama',
@@ -78,7 +80,7 @@ export default function MovieDetailsModal(props) {
                     vote_average: props.movie.vote_average,
                     tagline: props.movie.tagline || 'Tag line was empty', // getting bad request for update when I receive it as empty from the backend and sending back as is empty, so putting some not empty value here
                 };
-                store.dispatch(thunkedUpdateMovie(updatedMovie));
+                dispatch(thunkedUpdateMovie(updatedMovie));
             } else {
                 const newMovie = {
                     release_date: values.releaseDate,
@@ -88,7 +90,7 @@ export default function MovieDetailsModal(props) {
                     genres: values.genres,
                     runtime: Number(values.runtime), // bad request if string
                 };
-                store.dispatch(thunkedAddMovie(newMovie));
+                dispatch(thunkedAddMovie(newMovie));
             }
             handleClose();
         },

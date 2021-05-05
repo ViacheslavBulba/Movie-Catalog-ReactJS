@@ -3,10 +3,11 @@ import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
 
 import { setSortBy, setSortOrder, thunkedSetMovies } from '../../store/actions';
-import store from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Sorting() {
+    const dispatch = useDispatch();
+
     const sortBy = useSelector((state) => state.sortBy);
 
     const sortByOptions = [
@@ -15,13 +16,13 @@ export default function Sorting() {
     ];
 
     const onSelectionChange = (e) => {
-        store.dispatch(setSortBy(e.value));
+        dispatch(setSortBy(e.value));
         if (e.value === 'title') {
-            store.dispatch(setSortOrder('asc'));
+            dispatch(setSortOrder('asc'));
         } else {
-            store.dispatch(setSortOrder('desc'));
+            dispatch(setSortOrder('desc'));
         }
-        store.dispatch(thunkedSetMovies());
+        dispatch(thunkedSetMovies());
     };
 
     return (

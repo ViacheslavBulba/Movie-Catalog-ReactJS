@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
-import store from '../../store/store';
+
 import Filtering from '../Filtering/Filtering';
 import Header from '../Header/Header';
 import MovieList from '../MovieList/MovieList';
@@ -10,7 +10,11 @@ import ResultsCount from '../ResultsCount/ResultsCount';
 import Sorting from '../Sorting/Sorting';
 import { useLocation } from 'react-router-dom';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 export default function SearchView() {
+    const dispatch = useDispatch();
+
     let location = useLocation();
 
     let { title } = useParams();
@@ -18,9 +22,9 @@ export default function SearchView() {
     const checkPathOnLanding = () => {
         if (location.pathname !== '/') {
             const searchValue = title;
-            store.dispatch(setSearch(searchValue));
-            store.dispatch(setSearchBy('title'));
-            store.dispatch(thunkedSetMovies());
+            dispatch(setSearch(searchValue));
+            dispatch(setSearchBy('title'));
+            dispatch(thunkedSetMovies());
         }
     };
 

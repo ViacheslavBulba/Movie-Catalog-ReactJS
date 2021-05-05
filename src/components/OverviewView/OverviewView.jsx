@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { setMovieToOverview } from '../../store/actions';
-import store from '../../store/store';
+
 import Filtering from '../Filtering/Filtering';
 import MovieList from '../MovieList/MovieList';
 import MovieOverview from '../MovieOverview/MovieOverview';
@@ -12,7 +12,11 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ResultsCount from '../ResultsCount/ResultsCount';
 import Sorting from '../Sorting/Sorting';
 
+import { useDispatch } from 'react-redux';
+
 export default function OverviewView() {
+    const dispatch = useDispatch();
+
     let { id } = useParams();
 
     const [movieNotFound, setMovieNotFound] = useState(false);
@@ -22,7 +26,7 @@ export default function OverviewView() {
             .get(`http://localhost:4000/movies/${id}`)
             .then((response) => {
                 setMovieNotFound(false);
-                store.dispatch(setMovieToOverview(response.data));
+                dispatch(setMovieToOverview(response.data));
             })
             .catch(() => {
                 setMovieNotFound(true);

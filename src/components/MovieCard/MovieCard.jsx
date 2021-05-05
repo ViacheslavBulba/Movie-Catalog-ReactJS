@@ -7,17 +7,21 @@ import { Link } from 'react-router-dom';
 
 import noPicture from '../../../public/no-picture-available.jpg';
 import { thunkedDeleteMovie } from '../../store/actions';
-import store from '../../store/store';
+
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
+import { useDispatch } from 'react-redux';
+
 export default function MovieCard(props) {
+    const dispatch = useDispatch();
+
     const [showModal, setShowModal] = useState(false);
 
     const handleCloseModal = () => setShowModal(false);
     const showEditMovieModal = () => setShowModal(true);
 
     const handleDelete = (id) => {
-        store.dispatch(thunkedDeleteMovie(id));
+        dispatch(thunkedDeleteMovie(id));
     };
 
     const addDefaultSrc = (e) => {

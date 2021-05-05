@@ -5,10 +5,12 @@ import { useHistory } from 'react-router-dom';
 
 import logo from '../../../public/netflix-logo.svg';
 import { setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
-import store from '../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
 export default function Header() {
+    const dispatch = useDispatch();
+
     const history = useHistory();
 
     const [showModal, setShowModal] = useState(false);
@@ -22,9 +24,9 @@ export default function Header() {
     const showAddMovieModal = () => setShowModal(true);
 
     const handleSearch = () => {
-        store.dispatch(setSearch(searchValue));
-        store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
-        store.dispatch(thunkedSetMovies());
+        dispatch(setSearch(searchValue));
+        dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
+        dispatch(thunkedSetMovies());
         searchValue === ''
             ? history.push('/')
             : history.push('/search/' + searchValue);

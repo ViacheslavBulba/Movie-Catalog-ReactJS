@@ -1,11 +1,12 @@
 import React from 'react';
 import './Filtering.css';
 import { setFilterByGenres, thunkedSetMovies } from '../../store/actions';
-import store from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Filtering() {
     const genresFilter = useSelector((state) => state.filerByGenres);
+
+    const dispatch = useDispatch();
 
     const onFilterChange = (value) => {
         let filters = genresFilter;
@@ -18,8 +19,8 @@ export default function Filtering() {
                 filters = [...filters, value];
             }
         }
-        store.dispatch(setFilterByGenres(filters));
-        store.dispatch(thunkedSetMovies());
+        dispatch(setFilterByGenres(filters));
+        dispatch(thunkedSetMovies());
     };
 
     return (
