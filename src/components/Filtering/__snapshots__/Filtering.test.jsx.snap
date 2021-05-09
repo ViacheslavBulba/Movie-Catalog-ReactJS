@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for filtering 1`] = `
+<div
+  className="filter-container"
+>
+  <button
+    className="filter-option filter-active"
+    onClick={[Function]}
+    type="button"
+  >
+    All
+  </button>
+  <button
+    className="filter-option "
+    onClick={[Function]}
+    type="button"
+  >
+    Drama
+  </button>
+  <button
+    className="filter-option "
+    onClick={[Function]}
+    type="button"
+  >
+    Fantasy
+  </button>
+  <button
+    className="filter-option "
+    onClick={[Function]}
+    type="button"
+  >
+    Comedy
+  </button>
+  <button
+    className="filter-option "
+    onClick={[Function]}
+    type="button"
+  >
+    Action
+  </button>
+</div>
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for results count 1`] = `
+<div
+  className="result-count-container"
+>
+  <b>
+    1
+  </b>
+   
+  movies found
+</div>
+`;

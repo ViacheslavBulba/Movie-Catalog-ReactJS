@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for page not found 1`] = `
+<div
+  className="page-not-found-container"
+>
+  <div
+    className="logo-page-not-found-container"
+  >
+    <img
+      alt="logo"
+      className="logo"
+      src="netflix-logo.svg"
+    />
+  </div>
+  <span
+    className="page-not-found-text"
+  >
+    Page Not Found
+  </span>
+  <img
+    alt="not found"
+    className="not-found-image"
+    src="404-error.svg"
+  />
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    <button
+      className="go-back-button"
+      type="button"
+    >
+      GO BACK TO HOME
+    </button>
+  </a>
+</div>
+`;

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header snapshot test 1`] = `
+<header
+  className="header-container"
+>
+  <div
+    className="logo-and-add-button-container"
+  >
+    <img
+      alt="logo"
+      className="logo"
+      src="netflix-logo.svg"
+    />
+    <button
+      className="add-button"
+      onClick={[Function]}
+      type="button"
+    >
+      ADD MOVIE
+    </button>
+  </div>
+  <div
+    className="header-text"
+  >
+    FIND YOUR MOVIE
+  </div>
+  <div
+    className="search-container"
+  >
+    <input
+      className="search-input"
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      placeholder="What do you want to watch?"
+      type="text"
+      value=""
+    />
+    <button
+      className="search-button"
+      onClick={[Function]}
+      type="button"
+    >
+      SEARCH
+    </button>
+  </div>
+</header>
+`;

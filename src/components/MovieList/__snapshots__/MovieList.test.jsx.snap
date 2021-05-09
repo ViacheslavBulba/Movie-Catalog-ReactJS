@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for movie list 1`] = `
+<div
+  className="movie-list-container"
+>
+  <div
+    className="movie-card-container"
+  >
+    <div
+      className="edit-delete-icons-container"
+    >
+      <button
+        aria-label="edit"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa fa-edit"
+        />
+      </button>
+      <button
+        aria-label="delete"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa fa-trash"
+        />
+      </button>
+    </div>
+    <a
+      href="/film/1"
+      onClick={[Function]}
+    >
+      <img
+        alt="poster"
+        className="movie-image"
+        onError={[Function]}
+        src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+      />
+    </a>
+    <div
+      className="name-and-year-container"
+    >
+      <div>
+        mock movie 1
+      </div>
+      <time
+        className="year"
+        dateTime={"2021-04-01T07:00:00.000Z"}
+      >
+        2021
+      </time>
+    </div>
+    <div
+      className="genres"
+    >
+      Drama, Romance
+    </div>
+  </div>
+  <div
+    className="movie-card-container"
+  >
+    <div
+      className="edit-delete-icons-container"
+    >
+      <button
+        aria-label="edit"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa fa-edit"
+        />
+      </button>
+      <button
+        aria-label="delete"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa fa-trash"
+        />
+      </button>
+    </div>
+    <a
+      href="/film/2"
+      onClick={[Function]}
+    >
+      <img
+        alt="poster"
+        className="movie-image"
+        onError={[Function]}
+        src="https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg"
+      />
+    </a>
+    <div
+      className="name-and-year-container"
+    >
+      <div>
+        mock movie 2
+      </div>
+      <time
+        className="year"
+        dateTime={"2021-01-01T08:00:00.000Z"}
+      >
+        2021
+      </time>
+    </div>
+    <div
+      className="genres"
+    >
+      Drama, Romance
+    </div>
+  </div>
+</div>
+`;

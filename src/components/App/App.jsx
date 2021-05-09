@@ -10,20 +10,20 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import SearchView from '../SearchView/SearchView';
 
 export default function App() {
-    return (
-        <ErrorBoundary>
-            <Switch>
-                <Route path={['/', '/search/:title']} exact>
-                    <SearchView />
-                </Route>
-                <Route path={'/film/:id'} exact>
-                    <OverviewView />
-                </Route>
-                <Route path='*'>
-                    <PageNotFound />
-                </Route>
-            </Switch>
-            <Footer />
-        </ErrorBoundary>
-    );
+  return (
+    <ErrorBoundary>
+      <Switch>
+        <Route path={['/', '/search/:title']} exact>
+          <SearchView />
+        </Route>
+        <Route path="/film/:id" exact>
+          <OverviewView />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
+        </Route>
+      </Switch>
+      <Footer />
+    </ErrorBoundary>
+  );
 }

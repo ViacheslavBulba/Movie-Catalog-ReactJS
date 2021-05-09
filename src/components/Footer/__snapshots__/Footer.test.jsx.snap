@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for footer 1`] = `
+<footer
+  className="footer-container"
+>
+  <img
+    alt="footer logo"
+    className="footer-logo"
+    src="netflix-logo.svg"
+  />
+</footer>
+`;
