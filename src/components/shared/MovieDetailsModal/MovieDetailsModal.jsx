@@ -249,5 +249,5 @@ MovieDetailsModal.propTypes = {
     runtime: PropTypes.number,
     vote_average: PropTypes.number,
     tagline: PropTypes.string,
-  }),
+  }).isRequired,
 };
