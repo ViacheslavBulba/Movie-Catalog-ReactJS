@@ -60,11 +60,6 @@ export default function MovieDetailsModal(props) {
     return errors;
   };
 
-  const handleClose = () => {
-    props.handleCloseModal();
-    formik.resetForm();
-};
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -101,9 +96,15 @@ export default function MovieDetailsModal(props) {
         };
         store.dispatch(thunkedAddMovie(newMovie));
       }
-      handleClose();
+      props.handleCloseModal();
+      formik.resetForm();
     },
   });
+
+  const handleClose = () => {
+    props.handleCloseModal();
+    formik.resetForm();
+  };
 
   function addRedBorderIfError(field) {
     return formik.touched[field] && formik.errors[field] ? 'red-border' : '';

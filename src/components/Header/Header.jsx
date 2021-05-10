@@ -25,9 +25,11 @@ export default function Header() {
     store.dispatch(setSearch(searchValue));
     store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
     store.dispatch(thunkedSetMovies());
-    searchValue === ''
-      ? history.push('/')
-      : history.push(`/search/${searchValue}`);
+    if (searchValue === '') {
+      history.push('/');
+    } else {
+      history.push(`/search/${searchValue}`);
+    }
   };
 
   const doSearchIfEnterKeyPressed = (e) => {
