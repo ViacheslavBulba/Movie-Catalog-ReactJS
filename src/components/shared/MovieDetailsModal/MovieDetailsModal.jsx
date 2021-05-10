@@ -31,7 +31,7 @@ export default function MovieDetailsModal(props) {
 
   const { show, movie } = props;
 
-  const isEditing = movie ? true : false;
+  const isEditing = !!movie;
 
   const validate = (values) => {
     const errors = {};
