@@ -1,5 +1,4 @@
 import axios from 'axios';
-import config from 'config';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ import MovieOverview from '../MovieOverview/MovieOverview';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ResultsCount from '../ResultsCount/ResultsCount';
 import Sorting from '../Sorting/Sorting';
+import config from '../../../config/backendUrlConfig.json';
 
 export default function OverviewView() {
   const { id } = useParams();

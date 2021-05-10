@@ -1,5 +1,5 @@
-import config from 'config';
 import axios from 'axios';
+import config from '../../config/backendUrlConfig.json';
 import actionType from './actionTypes';
 import store from './store';
 
