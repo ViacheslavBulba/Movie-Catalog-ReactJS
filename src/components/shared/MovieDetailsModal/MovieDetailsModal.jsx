@@ -22,6 +22,11 @@ export default function MovieDetailsModal(props) {
         'Family',
         'Documentary',
         'Horror',
+        'War',
+        'Romance',
+        'Western',
+        'Mystery',
+        'Animation',
     ];
 
     const isEditing = props.movie ? true : false;
@@ -110,8 +115,8 @@ export default function MovieDetailsModal(props) {
             show={props.show}
             onHide={handleClose}
             animation={null}
-            backdrop='static'
-            size='lg'
+            backdrop="static"
+            size="lg"
         >
             <form onSubmit={formik.handleSubmit}>
                 <Modal.Header closeButton>
@@ -120,11 +125,11 @@ export default function MovieDetailsModal(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>Title</span>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">Title</span>
                         <input
-                            type='text'
-                            placeholder='Enter Title here'
+                            type="text"
+                            placeholder="Enter Title here"
                             className={
                                 'dialog-field-input ' +
                                 addRedBorderIfError('title')
@@ -132,38 +137,38 @@ export default function MovieDetailsModal(props) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.title}
-                            id='title'
-                            name='title'
+                            id="title"
+                            name="title"
                         />
                         {formik.touched.title && formik.errors.title ? (
-                            <span className='error'>{formik.errors.title}</span>
+                            <span className="error">{formik.errors.title}</span>
                         ) : null}
                     </div>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>Release date</span>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">Release date</span>
                         <Form.Control
-                            type='date'
+                            type="date"
                             className={addRedBorderIfError('releaseDate')}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.releaseDate}
-                            id='releaseDate'
-                            name='releaseDate'
+                            id="releaseDate"
+                            name="releaseDate"
                         />
                         {formik.touched.releaseDate &&
                         formik.errors.releaseDate ? (
-                            <span className='error'>
+                            <span className="error">
                                 {formik.errors.releaseDate}
                             </span>
                         ) : null}
                     </div>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">
                             Movie Poster URL
                         </span>
                         <input
-                            type='text'
-                            placeholder='Enter Movie Poster URL here'
+                            type="text"
+                            placeholder="Enter Movie Poster URL here"
                             className={
                                 'dialog-field-input ' +
                                 addRedBorderIfError('posterUrl')
@@ -171,38 +176,38 @@ export default function MovieDetailsModal(props) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.posterUrl}
-                            id='posterUrl'
-                            name='posterUrl'
+                            id="posterUrl"
+                            name="posterUrl"
                         />
                         {formik.touched.posterUrl && formik.errors.posterUrl ? (
-                            <span className='error'>
+                            <span className="error">
                                 {formik.errors.posterUrl}
                             </span>
                         ) : null}
                     </div>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>Genres</span>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">Genres</span>
                         <MultiSelect
                             className={addRedBorderIfError('genres')}
                             options={allGenres}
                             maxSelectedLabels={11}
-                            placeholder='Select Genres'
+                            placeholder="Select Genres"
                             value={formik.values.genres}
                             onChange={formik.handleChange}
-                            id='genres'
-                            name='genres'
+                            id="genres"
+                            name="genres"
                         />
                         {formik.touched.genres && formik.errors.genres ? (
-                            <span className='error'>
+                            <span className="error">
                                 {formik.errors.genres}
                             </span>
                         ) : null}
                     </div>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>Overview</span>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">Overview</span>
                         <input
-                            type='text'
-                            placeholder='Enter Overview here'
+                            type="text"
+                            placeholder="Enter Overview here"
                             className={
                                 'dialog-field-input ' +
                                 addRedBorderIfError('overview')
@@ -210,20 +215,20 @@ export default function MovieDetailsModal(props) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.overview}
-                            id='overview'
-                            name='overview'
+                            id="overview"
+                            name="overview"
                         />
                         {formik.touched.overview && formik.errors.overview ? (
-                            <span className='error'>
+                            <span className="error">
                                 {formik.errors.overview}
                             </span>
                         ) : null}
                     </div>
-                    <div className='dialog-field-container'>
-                        <span className='dialog-field-label'>Runtime</span>
+                    <div className="dialog-field-container">
+                        <span className="dialog-field-label">Runtime</span>
                         <input
-                            type='text'
-                            placeholder='Enter Runtime here'
+                            type="text"
+                            placeholder="Enter Runtime here"
                             className={
                                 'dialog-field-input ' +
                                 addRedBorderIfError('runtime')
@@ -231,11 +236,11 @@ export default function MovieDetailsModal(props) {
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.runtime}
-                            id='runtime'
-                            name='runtime'
+                            id="runtime"
+                            name="runtime"
                         />
                         {formik.touched.runtime && formik.errors.runtime ? (
-                            <span className='error'>
+                            <span className="error">
                                 {formik.errors.runtime}
                             </span>
                         ) : null}
@@ -243,13 +248,13 @@ export default function MovieDetailsModal(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant='secondary'
+                        variant="secondary"
                         onClick={formik.handleReset}
-                        type='button'
+                        type="button"
                     >
                         Reset
                     </Button>
-                    <Button variant='primary' type='submit'>
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Modal.Footer>
