@@ -9,7 +9,28 @@ import OverviewView from '../OverviewView/OverviewView';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import SearchView from '../SearchView/SearchView';
 
+import { useDispatch } from 'react-redux';
+import { useEffect} from 'react';
+import { fetchMoviesPending, thunkedSetMovies } from '../../store/actions';
+
 export default function App() {
+
+  function fetchMovies() {
+    return (dispatch) => {
+        dispatch(fetchMoviesPending());
+        dispatch(thunkedSetMovies());
+    };
+  }
+
+  const useFetching = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchMovies());
+    }, []);
+  };
+
+  useFetching();
+
     return (
         <ErrorBoundary>
             <Switch>
