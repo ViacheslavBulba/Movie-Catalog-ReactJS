@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import logo from '../../../public/netflix-logo.svg';
-import { setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
+import { setCurrentPage, setSearch, setSearchBy, thunkedSetMovies } from '../../store/actions';
 import store from '../../store/store';
 import MovieDetailsModal from '../shared/MovieDetailsModal/MovieDetailsModal';
 
@@ -24,6 +24,7 @@ export default function Header() {
     const handleSearch = () => {
         store.dispatch(setSearch(searchValue));
         store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
+        store.dispatch(setCurrentPage(1));
         store.dispatch(thunkedSetMovies());
         searchValue === ''
             ? history.push('/')

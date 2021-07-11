@@ -28,6 +28,20 @@ export const fetchMoviesPending = () => ({
     type: actionType.FETCH_MOVIES_PENDING
 });
 
+export const setResultsCount = resultsCount => ({
+    type: actionType.SET_RESULTS_COUNT,
+    payload: {
+        resultsCount
+    }
+});
+
+export const setCurrentPage = pagingCurrentPage => ({
+    type: actionType.SET_CURRENT_PAGE,
+    payload: {
+        pagingCurrentPage
+    }
+});
+
 export const setMovies = movies => ({
     type: actionType.SET_MOVIES,
     payload: {
@@ -44,10 +58,13 @@ export const thunkedSetMovies = () =>
                 search: store.getState().search,
                 sortBy: store.getState().sortBy,
                 sortOrder: store.getState().sortOrder,
+                offset: store.getState().pagingCurrentPage * store.getState().pagingPageSize - store.getState().pagingPageSize,
+                limit: store.getState().pagingPageSize,
             },
         })
             .then(response => {
                 dispatch(setMovies(response.data.data));
+                dispatch(setResultsCount(response.data.totalAmount));
             })
             .catch(error => {
                 dispatch(fetchMoviesError(error));

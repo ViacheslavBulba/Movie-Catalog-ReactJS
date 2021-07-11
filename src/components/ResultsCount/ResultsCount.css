@@ -1,5 +1,9 @@
 .result-count-container {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
     margin-left: 60px;
+    margin-right: 60px;
 }

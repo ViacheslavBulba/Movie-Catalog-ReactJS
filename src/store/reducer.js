@@ -3,6 +3,9 @@ import actionType from './actionTypes';
 const initialState = {
     pending: false,
     movies: [],
+    resultsCount: 0,
+    pagingPageSize: 9,
+    pagingCurrentPage: 1,
     error: null,
     sortBy: 'release_date',
     sortOrder: 'desc',
@@ -30,6 +33,16 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 pending: false,
                 error: action.payload.error
+            };
+        case actionType.SET_RESULTS_COUNT:
+            return {
+                ...state,
+                resultsCount: action.payload.resultsCount
+            };
+        case actionType.SET_CURRENT_PAGE:
+            return {
+                ...state,
+                pagingCurrentPage: action.payload.pagingCurrentPage
             };
         case actionType.SET_SORT_BY:
             return {
