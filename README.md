@@ -1,5 +1,8 @@
 # _Movie Catalog ReactJS Project_
 
+<img width="1439" alt="Screen Shot 2021-07-11 at 7 20 07 PM" src="https://user-images.githubusercontent.com/29576017/125228358-7a964f00-e289-11eb-9db9-7c19ad73525f.png">
+<img width="1440" alt="Screen Shot 2021-07-11 at 7 20 59 PM" src="https://user-images.githubusercontent.com/29576017/125228371-7d913f80-e289-11eb-8da0-f0927717f6c5.png">
+
 # Project Features
 
 - Function components
