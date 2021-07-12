@@ -13,6 +13,33 @@
 - Prop Types
 - ESLint
 
+# How to execute the project in your machine
+
+1. Download and install NodeJS with NPM from https://nodejs.org/en/
+
+2. Download or clone the project source code
+
+3. Install all required npm packages (dependencies)
+
+`cd ~/git/react-mentoring-program`
+
+`npm install`
+
+4. Start back-end in a separate terminal window
+
+`cd ~/git/react-mentoring-program/node_modules/movie-api-server`
+
+`npm start`
+
+5. Start front-end in a separate terminal window
+
+`cd ~/git/react-mentoring-program`
+
+`npm start`
+
+
+
+
 ### Below are resources used for implementation and steps performed
 
 #### How to add a backend (local movies API service/server) as a dependency
