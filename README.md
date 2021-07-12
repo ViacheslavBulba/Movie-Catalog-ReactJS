@@ -35,7 +35,7 @@ https://www.robinwieruch.de/react-memo
 
 `https://react-bootstrap.github.io/components/modal/`
 
-##### Additional libraries
+#### Additional libraries
 
 `npm i svg-url-loader --save-dev`
 
@@ -76,7 +76,7 @@ https://babeljs.io/setup#installation
 
 `npm install --save-dev html-webpack-plugin`
 
-##### Babel setup
+#### Babel setup
 
 https://babeljs.io/docs/en/usage/
 
@@ -104,7 +104,7 @@ run `./node_modules/.bin/jest --init` to create config
 
 `npm install --save-dev @testing-library/user-event`
 
-##### Commands to build and run project
+#### Commands to build and run project
 
 `npm run build`
 
