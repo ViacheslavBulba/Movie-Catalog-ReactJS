@@ -1,8 +1,8 @@
-# _Movie Catalog React Project_
+# _Movie Catalog ReactJS Project_
 
 # Project Features
 
-- React Function components
+- Function components
 - Webpack
 - Redux, React-Redux, Redux-Thunk
 - React-Router
@@ -36,9 +36,6 @@
 `cd ~/git/react-mentoring-program`
 
 `npm start`
-
-
-
 
 ### Below are resources used for implementation and steps performed
 
