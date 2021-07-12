@@ -1,6 +1,6 @@
 import React from 'react';
 import './Filtering.css';
-import { setFilterByGenres, thunkedSetMovies } from '../../store/actions';
+import { setFilterByGenres, thunkedSetMovies, setCurrentPage } from '../../store/actions';
 import store from '../../store/store';
 import { useSelector } from 'react-redux';
 
@@ -19,6 +19,7 @@ export default function Filtering() {
             }
         }
         store.dispatch(setFilterByGenres(filters));
+        store.dispatch(setCurrentPage(1));
         store.dispatch(thunkedSetMovies());
     };
 

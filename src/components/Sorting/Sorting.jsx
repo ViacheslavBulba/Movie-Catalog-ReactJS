@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import './Sorting.css';
 
-import { setSortBy, setSortOrder, thunkedSetMovies } from '../../store/actions';
+import { setSortBy, setSortOrder, thunkedSetMovies, setCurrentPage } from '../../store/actions';
 import store from '../../store/store';
 import { useSelector } from 'react-redux';
 
@@ -21,6 +21,7 @@ export default function Sorting() {
         } else {
             store.dispatch(setSortOrder('desc'));
         }
+        store.dispatch(setCurrentPage(1));
         store.dispatch(thunkedSetMovies());
     };
 
