@@ -7,7 +7,10 @@ module.exports = {
     entry: './src/index.jsx',
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({ template: './src/index.html' }),
+        new HtmlWebpackPlugin({ 
+            template: './src/index.html',
+            favicon: "./public/favicon-32x32.png"
+        }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[id].css',
