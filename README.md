@@ -12,7 +12,8 @@
 - Formik Forms
 - Testing with Jest
 - Pagination of search results
-- 404 Page Not Found page for nonexistent routes
+- "404 Page Not Found" page for nonexistent routes
+- "Poster Not Available" mock image for missing movie posters
 - Prop Types
 - ESLint
 
