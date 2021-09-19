@@ -44,7 +44,7 @@
 }
 
 .search-button {
-    width: 170px;
+    width: 150px;
     height: 40px;
     border-radius: 5px;
     font-family: 'Source Sans Pro';
@@ -53,9 +53,19 @@
     background-color: #f65261;
 }
 
+.reset-search-button {
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    background-color: #ffffff;
+    color: #f65261;
+}
+
 .add-button {
     padding: 0;
-    width: 170px;
+    width: 150px;
     height: 40px;
     border-radius: 5px;
     font-family: 'Source Sans Pro';

@@ -31,6 +31,14 @@ export default function Header() {
             : history.push('/search/' + searchValue);
     };
 
+    const resetSearch = () => {
+        setSearchValue('')
+        store.dispatch(setSearch(''));
+        store.dispatch(setCurrentPage(1));
+        store.dispatch(thunkedSetMovies());
+        history.push('/')
+    };
+
     const doSearchIfEnterKeyPressed = (e) => {
         if (e.which === 13) {
             handleSearch();
@@ -55,6 +63,10 @@ export default function Header() {
 
             <button className='search-button' onClick={handleSearch}>
                 SEARCH
+            </button>
+
+            <button className='reset-search-button' onClick={resetSearch}>
+                RESET SEARCH
             </button>
 
             <button className='add-button' onClick={showAddMovieModal}>
