@@ -49,7 +49,7 @@ export default function Header() {
         <header className='header-container'>
 
             <div className='logo-container'>
-                <img src={logo} alt='logo' className='logo' />
+                <img src={logo} alt='logo' className='logo' onClick={resetSearch}/>
             </div>
 
             <input

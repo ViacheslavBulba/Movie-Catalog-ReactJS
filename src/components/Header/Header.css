@@ -29,6 +29,7 @@
 
 .logo-container {
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .search-input {
