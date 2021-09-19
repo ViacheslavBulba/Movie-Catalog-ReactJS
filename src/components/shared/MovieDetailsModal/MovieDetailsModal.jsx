@@ -119,10 +119,11 @@ export default function MovieDetailsModal(props) {
             size="lg"
         >
             <form onSubmit={formik.handleSubmit}>
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>
                         {isEditing ? 'EDIT MOVIE' : 'ADD MOVIE'}
                     </Modal.Title>
+                    <button onClick={handleClose}>X</button>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="dialog-field-container">
