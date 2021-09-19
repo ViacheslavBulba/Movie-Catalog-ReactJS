@@ -1,7 +1,7 @@
 # _Movie Catalog ReactJS Project_
 
-<img width="1439" alt="Screen Shot 2021-07-11 at 7 20 07 PM" src="https://user-images.githubusercontent.com/29576017/125228358-7a964f00-e289-11eb-9db9-7c19ad73525f.png">
-<img width="1440" alt="Screen Shot 2021-07-11 at 7 20 59 PM" src="https://user-images.githubusercontent.com/29576017/125228371-7d913f80-e289-11eb-8da0-f0927717f6c5.png">
+<img width="1418" alt="Screen Shot 2021-09-19 at 12 56 13 PM" src="https://user-images.githubusercontent.com/29576017/133941219-d2d2524a-93ae-4d85-8c5a-4187ed6ad12c.png">
+<img width="1421" alt="Screen Shot 2021-09-19 at 12 56 26 PM" src="https://user-images.githubusercontent.com/29576017/133941224-e5a5aae7-f784-40fc-a1fc-8fedc962ea6c.png">
 
 # Project Features
 
@@ -12,7 +12,8 @@
 - Formik Forms
 - Testing with Jest
 - Pagination of search results
-- 404 Page Not Found page for nonexistent routes
+- "404 Page Not Found" page for nonexistent routes
+- "Poster Not Available" mock image for missing movie posters
 - Prop Types
 - ESLint
 

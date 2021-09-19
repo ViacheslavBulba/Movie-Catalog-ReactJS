@@ -4,7 +4,7 @@ const initialState = {
     pending: false,
     movies: [],
     resultsCount: 0,
-    pagingPageSize: 9,
+    pagingPageSize: 15,
     pagingCurrentPage: 1,
     error: null,
     sortBy: 'release_date',

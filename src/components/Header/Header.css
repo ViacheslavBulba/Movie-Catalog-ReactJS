@@ -1,7 +1,10 @@
 .header-container {
     width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header-container::before {
@@ -24,49 +27,15 @@
     filter: blur(3px) brightness(0.5);
 }
 
-.logo-and-add-button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 60px;
-    margin-right: 60px;
-}
-
-.add-button {
-    padding: 0;
-    width: 170px;
-    height: 40px;
-    border-radius: 5px;
-    font-family: 'Source Sans Pro';
-    font-size: 18px;
-    color: #f65261;
-    background-color: #555555;
-}
-
-.header-text {
-    font-family: 'Source Sans Pro';
-    font-size: 32px;
-    color: #ffffff;
-    margin-bottom: 20px;
-    margin-left: 10vw;
-    margin-right: 10vw;
-}
-
-.search-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 150px;
-    margin-left: 10vw;
-    margin-right: 10vw;
+.logo-container {
+    margin-left: 20px;
+    cursor: pointer;
 }
 
 .search-input {
-    width: 70%;
+    width: 50%;
     min-width: 250px;
-    height: 50px;
+    height: 40px;
     border-radius: 3px;
     border: solid 1px #d9dbe3;
     background-color: #ffffff;
@@ -76,12 +45,33 @@
 }
 
 .search-button {
-    width: 30%;
-    margin-left: 10px;
-    height: 50px;
+    width: 150px;
+    height: 40px;
     border-radius: 5px;
     font-family: 'Source Sans Pro';
     font-size: 18px;
     color: #ffffff;
     background-color: #f65261;
+}
+
+.reset-search-button {
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    background-color: #ffffff;
+    color: #f65261;
+}
+
+.add-button {
+    padding: 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    color: #f65261;
+    background-color: #555555;
+    margin-right: 30px;
 }
