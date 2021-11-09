@@ -38,3 +38,9 @@ button > span {
     box-shadow: none;
     color: #999;
 }
+
+@media screen and (max-width: 1288px) {
+    .result-count-container {
+        display: none;
+    }
+}

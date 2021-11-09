@@ -1,5 +1,5 @@
 {
-  "name": "react-mentoring-program",
+  "name": "movie-catalog-reactjs",
   "version": "1.0.0",
   "description": "React mentoring program 2021",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ViacheslavBulba/react-mentoring-program.git"
+    "url": "git+https://github.com/ViacheslavBulba/movie-catalog-reactjs.git"
   },
   "keywords": [],
   "author": "Slava Bulba",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ViacheslavBulba/react-mentoring-program/issues"
+    "url": "https://github.com/ViacheslavBulba/movie-catalog-reactjs/issues"
   },
-  "homepage": "https://github.com/ViacheslavBulba/react-mentoring-program#readme",
+  "homepage": "https://github.com/ViacheslavBulba/movie-catalog-reactjs#readme",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@reduxjs/toolkit": "^1.5.0",

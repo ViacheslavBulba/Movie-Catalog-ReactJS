@@ -23,7 +23,7 @@ export default function Header() {
 
     const handleSearch = () => {
         store.dispatch(setSearch(searchValue));
-        store.dispatch(setSearchBy('title')); // re-setting it to 'title' here in case it is changed by other component
+        store.dispatch(setSearchBy('title'));
         store.dispatch(setCurrentPage(1));
         store.dispatch(thunkedSetMovies());
         searchValue === ''
@@ -47,36 +47,32 @@ export default function Header() {
 
     return (
         <header className='header-container'>
-
             <div className='logo-container'>
-                <img src={logo} alt='logo' className='logo' onClick={resetSearch}/>
+                <img src={logo} alt='logo' className='logo' onClick={resetSearch} />
             </div>
-
             <input
+                className='search-input'
                 type='text'
                 placeholder='What do you want to watch?'
-                className='search-input'
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 onKeyPress={doSearchIfEnterKeyPressed}
             />
-
-            <button className='search-button' onClick={handleSearch}>
-                SEARCH
-            </button>
-
-            <button className='reset-search-button' onClick={resetSearch}>
-                RESET SEARCH
-            </button>
-
-            <button className='add-button' onClick={showAddMovieModal}>
-                ADD MOVIE
-            </button>
+            <div className='buttons-container'>
+                <button className='buttons search-button' onClick={handleSearch}>
+                    SEARCH
+                </button>
+                <button className='buttons reset-search-button' onClick={resetSearch}>
+                    RESET SEARCH
+                </button>
+                <button className='buttons add-button' onClick={showAddMovieModal}>
+                    ADD MOVIE
+                </button>
+            </div>
             <MovieDetailsModal
                 show={showModal}
                 handleCloseModal={handleCloseModal}
             />
-
         </header>
     );
 }
