@@ -123,8 +123,8 @@
     }
 
     .buttons {
-        width: 80vw;
-        min-width: 0px;
+        width: 50vw;
+        min-width: 150px;
         height: 40px;
         border-radius: 5px;
         font-family: 'Source Sans Pro';

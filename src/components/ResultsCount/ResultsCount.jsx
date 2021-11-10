@@ -24,11 +24,11 @@ export default function ResultsCount() {
         <>
             {count !== 0 && (
                 <div className='result-count-container'>
-                    <div>
+                    <div className='total-movies'>
                         <b>{count}</b> movies found
                     </div>
                     <Paging />
-                    <div>
+                    <div className='showing-results'>
                         Showing results <b>{startIndex}</b> - <b>{endIndex}</b>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ export default function Filtering() {
 
     return (
         <div className='filter-container'>
+            <span className='dropdown-label'>FILTER BY GENRE:</span>
             <button
                 className={
                     'filter-option ' +

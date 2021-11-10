@@ -26,3 +26,22 @@
     height: 8px;
     background-color: #7c7c7c4b;
 }
+
+@media screen and (max-width: 929px) {
+    .filtering-and-sorting-container {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sorting-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .filter-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

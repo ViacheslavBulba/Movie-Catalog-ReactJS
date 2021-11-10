@@ -39,8 +39,8 @@ button > span {
     color: #999;
 }
 
-@media screen and (max-width: 1288px) {
-    .result-count-container {
+@media screen and (max-width: 420px) {
+    .paginationItem {
         display: none;
     }
 }

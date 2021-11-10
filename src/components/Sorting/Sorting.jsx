@@ -26,7 +26,7 @@ export default function Sorting() {
     };
 
     return (
-        <div>
+        <div className='sorting-container'>
             <span className='dropdown-label'>SORT BY:</span>
             <Dropdown
                 value={sortBy}

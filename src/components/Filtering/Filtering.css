@@ -12,3 +12,14 @@
 .filter-active {
     border-bottom: 3px solid #fff;
 }
+
+.dropdown-label {
+    margin-right: 20px;
+    color: #555555;
+}
+
+@media screen and (max-width: 704px) {
+    .filter-container {
+        display: none
+    }
+}
