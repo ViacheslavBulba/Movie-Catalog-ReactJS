@@ -29,8 +29,16 @@ export default function OverviewView() {
             });
     };
 
+    const scrollToTop = () =>{
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth'
+        });
+      };
+
     useEffect(() => {
         getMovieOnLanding();
+        scrollToTop();
     }, [id]);
 
     return (

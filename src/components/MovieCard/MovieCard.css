@@ -47,3 +47,20 @@
 .genres {
     color: #555555;
 }
+
+@media screen and (max-width: 579px) {
+    .movie-card-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .movie-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .name-and-year-container {
+        margin-top: 10px;
+    }
+}
