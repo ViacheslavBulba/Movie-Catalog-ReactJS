@@ -49,8 +49,8 @@ export default function MovieOverview() {
                                     parse='YYYY-MM-dd'
                                     format='YYYY'
                                     className='overview-year'
-                                />
-                                <span>{movie.runtime} min</span>
+                                />&nbsp;-&nbsp;
+                                <span>{movie.runtime || 'N/A'} min</span>
                             </div>
                             <span className='overview-text'>
                                 {movie.overview}

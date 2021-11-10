@@ -96,10 +96,6 @@
     margin-bottom: 5px;
 }
 
-.overview-year {
-    margin-right: 10px;
-}
-
 @media screen and (max-width: 929px) {
     .movie-image-overview {
         display: none;
@@ -108,7 +104,6 @@
     .overview-text-container {
         margin-left: 0;
         margin-right: 0;
-        /* width: 100%; */
     }
 
     .movie-details-container {

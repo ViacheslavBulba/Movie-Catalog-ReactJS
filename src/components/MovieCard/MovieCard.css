@@ -63,4 +63,8 @@
     .name-and-year-container {
         margin-top: 10px;
     }
+
+    .edit-delete-icons-container {
+        width: 90%;
+    }
 }
