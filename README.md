@@ -43,4 +43,6 @@ In this project I was provided with already implemented backend and the goal was
 
 `cd [path-to-project-folder]`
 
+`export NODE_OPTIONS=--openssl-legacy-provider`
+
 `npm start`
